@@ -5,7 +5,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12">
         <div class="card mcard_3">
             <div class="body">
-                <a href="javascript:void(0);"><img src="{{asset('assets/upload/'.Auth::user()->image)}}" class="rounded-circle" alt="profile-image"></a>
+                <a href="javascript:void(0);"><img src="{{asset('upload/profile/'.Auth::user()->image)}}" class="rounded-circle" alt="profile-image"></a>
                 <h4 class="m-t-10">{{Auth::user()->name}}</h4>
                 <div class="row">
                     <div class="col-12 mb-4">

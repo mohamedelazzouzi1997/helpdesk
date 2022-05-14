@@ -13,6 +13,7 @@ class ticketController extends Controller
 
 
     public function index(){
+
         $total_tickets = Ticket::all();
         $pending_tickets = Ticket::where('status','pending')->get();
         $open_tickets = Ticket::where('status','open')->get();

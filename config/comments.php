@@ -64,7 +64,7 @@ return [
      *
      * Comments will be soft deleted using laravels "softDeletes" trait.
      */
-    'soft_deletes' => false,
+    'soft_deletes' => true,
 
     /**
      * Enable/disable the package provider to load migrations.

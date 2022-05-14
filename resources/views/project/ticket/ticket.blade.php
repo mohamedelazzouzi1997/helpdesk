@@ -93,11 +93,6 @@
             <div style="padding-left: 18px;" class="header">
                 <h2><strong>Ticket</strong> Replies</h2>
             </div>
-            <div class="body mb-2">
-                <div class="summernote">
-                    Hello there,
-                </div>
-            </div>
             <div class="body">
                 <ul class="comment-reply list-unstyled">
                     @comments(['model' => $ticket])

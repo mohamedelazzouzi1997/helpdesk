@@ -8,7 +8,7 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <div class="image"><a href="#"><img src="../assets/images/profile_av.jpg" alt="User"></a></div>
+                    <div class="image"><a href="#"><img src="{{asset('upload/profile/'.Auth::user()->image)}}" alt="{{Auth::user()->name}}"></a></div>
                     <div class="detail">
                         <h4>{{Auth::user()->name}}</h4>
                         <small>{{Auth::user()->role}}</small>

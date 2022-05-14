@@ -13,11 +13,11 @@ class userController extends Controller
 
         $user =  User::find($id);
 
-        if($request->hasfile('image')){
-            $file = $request->file('image');
-            $extention = $file->getClientOriginalExtension();
-            $filename = time().'.'.$extention;
-            $file->move('upload/profile/'.$filename);
+        if($request->has('image')){
+            $file = $request->image;
+            $extention = $file->getClientOriginalName();
+            $filename = time().'_'. $extention;
+            $file->move(public_path('upload/profile/'),$filename);
             $user->update([
             'image' => $filename,
         ]);
