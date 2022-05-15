@@ -21,6 +21,7 @@ class CreateTicketsTable extends Migration
             $table->string('status')->default('open');
             $table->string('image')->nullable();
             // $table->unsignedBigInteger('project_id');
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('project_id')->constrained('projects')->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->timestamps();
         });

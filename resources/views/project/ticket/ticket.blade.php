@@ -21,16 +21,17 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="img">
-                    <img src="{{asset('assets/images/lg/avatar2.jpg')}}" class="rounded-circle" alt="profile-image">
+                <div class="img mx-auto">
+                    <img  style="margin-top: -20px;margin-right: 70px;" src="{{ $ticket->user->image == null ? 'https://ui-avatars.com/api/?color=ff0000&name='.$ticket->user->name : asset('upload/profile/'.$ticket->user->image) }}" class="rounded-circle" alt="profile-image">
                 </div>
                 <div class="user">
-                    <h5 class="mt-3 mb-1">{{ $ticket->created_by }}</h5>
-                    <small class="text-muted">{{ $user->email }}</small>
+                    <h5 class="mt-3 mb-1">{{ $ticket->user->name }}</h5>
+                    <small class="text-muted">{{ $ticket->user->email }}</small>
                     <ul class="list-unstyled mt-3 d-flex">
-                        <li class="mr-3"><strong>Total:-</strong> 13</li>
-                        <li class="mr-3"><strong>Open:-</strong> 4</li>
-                        <li><strong>Closed:-</strong> 9</li>
+                        <li class="mr-3"><strong class='badge badge-primary'>Total:-</strong> {{ $user_ticket_count->count() }}</li>
+                        <li class="mr-3"><strong class='badge badge-danger'>Open:-</strong> {{ $user_ticket_open->count() }}</li>
+                        <li class="mr-3"><strong class='badge badge-success'>Closed:-</strong> {{ $user_ticket_close->count() }}</li>
+                        <li class="mr-3"><strong class='badge badge-warning'>In progress:-</strong> {{ $user_ticket_in_progress->count() }}</li>
                     </ul>
                 </div>
             </div>
@@ -43,8 +44,11 @@
                 <small class="text-muted">Title: </small>
                 <p>{{ $ticket->title }}</p>
                 <hr>
-                <small class="text-muted">Date: </small>
-                <p>{{ $ticket->created_at }}</p>
+                <small class="text-muted">Created Date: </small>
+                <p>{{ date('d/m/Y h:s', strtotime($ticket->created_at)); }}</p>
+                <hr>
+                <small class="text-muted">DeadLine Date: </small>
+                <p>{{ date('d/m/Y h:s', strtotime($ticket->end_time)); }}</p>
                 <hr>
                 <ul class="list-unstyled">
                     <li>
@@ -61,7 +65,7 @@
                         <div>status</div>
                             @if ($ticket->status =='open')
                                 <span class="badge badge-primary">{{ $ticket->status }}</span>
-                            @elseif ($ticket->status =='pending')
+                            @elseif ($ticket->status =='in progress')
                                 <span class="badge badge-warning">{{ $ticket->status }}</span>
                             @elseif ($ticket->status =='resolve')
                                 <span class="badge badge-success">{{ $ticket->status }}</span>
@@ -85,7 +89,7 @@
     <div class="col-lg-8 col-md-12">
         <div class="card">
             <div class="body">
-                <h5>Ticket</h5>
+                <h5><span style='color:#e88797'>Ticket</span> Description</h5>
                 <span>{{ $ticket->description }}</span>
             </div>
         </div>
