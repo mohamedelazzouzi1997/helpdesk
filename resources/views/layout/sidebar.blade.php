@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </li>
-            <li class="{{ Request::segment(1) === 'dashboard' ? 'active open' : null }}"><a href=""><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
+            <li class="{{ Request::segment(1) === 'dashboard' ? 'active open' : null }}"><a href="{{ route('tickets') }}"><i class="zmdi zmdi-home"></i><span>Dashboard</span></a></li>
             <li class="{{ Request::segment(1) === 'my-profile' ? 'active open' : null }}"><a href="{{ route('profile') }}"><i class="zmdi zmdi-account"></i><span>My Profile</span></a></li>
             <li class="{{ Request::segment(1) === 'project' ? 'active open' : null }}">
                 <a href="#" class="menu-toggle"><i class="zmdi zmdi-assignment"></i> <span>Project</span></a>

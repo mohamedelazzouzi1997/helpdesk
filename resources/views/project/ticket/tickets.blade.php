@@ -65,8 +65,8 @@
             <div class="table-responsive">
                 <form action='{{ route('tickets') }}' class="form-group" method="GET">
                     @csrf
-                    <div class="col-lg-4 col-md-6">
-                    <div class="input-group masked-input mb-3">
+                    <div class="col-lg-4 col-md-6 inlineblock">
+                    <div style="margin-left: -15px;" class="input-group masked-input mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="zmdi zmdi-search"></i></span>
                         </div>
@@ -74,7 +74,7 @@
                     </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">filter</button>
+                    <button style="margin-bottom: 10px;" type="submit" class="btn btn-primary">filter</button>
                 </form>
                 <table class="table table-hover c_table">
                     <thead class='text-center'>
