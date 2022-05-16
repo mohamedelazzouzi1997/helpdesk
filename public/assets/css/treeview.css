@@ -28,7 +28,7 @@ details>summary {
     margin-top: 0.25em;
     color: #99e;
     padding: 0.1em 0.5em 0.2em;
-    background: #444;
+    background: rgb(23, 53, 90);
 }
 
 details>summary:before {
@@ -39,7 +39,7 @@ details>summary:before {
 }
 
 details[open]>summary {
-    background: #66e;
+    background: #11203b;
     color: #eee;
 }
 

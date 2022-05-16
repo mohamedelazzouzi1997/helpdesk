@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects', 'projectController@index')->name('projects');
     Route::get('/create/project', 'projectController@create')->name('create.project');
     Route::post('/projects', 'projectController@store')->name('store.project');
+    Route::get('/project/{id}', 'projectController@show')->name('show.project');
     //project route
 
     Route::put('/profile/{id}', 'userController@update')->name('update.profile');
