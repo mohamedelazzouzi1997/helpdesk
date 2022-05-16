@@ -22,16 +22,16 @@
                     </li>
                 </ul>
                 <div class="img mx-auto">
-                    <img  style="margin-top: -20px;margin-right: 70px;" src="{{ $ticket->user->image == null ? 'https://ui-avatars.com/api/?color=ff0000&name='.$ticket->user->name : asset('upload/profile/'.$ticket->user->image) }}" class="rounded-circle" alt="profile-image">
+                    <img class='rounded-circle' width="175" height='175'  src="{{ $ticket->user->image == null ? 'https://ui-avatars.com/api/?color=ff0000&name='.$ticket->user->name : asset('upload/profile/'.$ticket->user->image) }}" class="rounded-circle" alt="profile-image">
                 </div>
                 <div class="user">
                     <h5 class="mt-3 mb-1">{{ $ticket->user->name }}</h5>
                     <small class="text-muted">{{ $ticket->user->email }}</small>
-                    <ul class="list-unstyled mt-3 d-flex">
+                    <ul class="list-unstyled mt-3 mr-lg-3  d-flex">
                         <li class="mr-3"><strong class='badge badge-primary'>Total:-</strong> {{ $user_ticket_count->count() }}</li>
                         <li class="mr-3"><strong class='badge badge-danger'>Open:-</strong> {{ $user_ticket_open->count() }}</li>
                         <li class="mr-3"><strong class='badge badge-success'>Closed:-</strong> {{ $user_ticket_close->count() }}</li>
-                        <li class="mr-3"><strong class='badge badge-warning'>In progress:-</strong> {{ $user_ticket_in_progress->count() }}</li>
+
                     </ul>
                 </div>
             </div>

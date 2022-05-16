@@ -1,6 +1,6 @@
 @extends('layout.app')
-@section('title', 'Create Ticket')
-@section('parentPageTitle', 'Ticket')
+@section('title', 'Create Project')
+@section('parentPageTitle', 'Project')
 @section('page-style')
 <link rel="stylesheet" href="{{asset('assets/plugins/dropify/css/dropify.min.css')}}"/>
 <link rel="stylesheet" href="{{asset('assets/plugins/morrisjs/morris.css')}}"/>
@@ -22,11 +22,11 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="body">
-                <h6 class="card-inside-title text-primary">Add ticket</h6>
+                <h6 class="card-inside-title text-primary">Create Project</h6>
                 <div class="row clearfix">
                     <div class="col-sm-12">
 
-                        <form action='{{ route('store.ticket') }}' id="form_validation" method="POST">
+                        <form  class='form-group' action='{{ route('store.project') }}' id="form_validation" method="POST">
                             @csrf
                             <div class='mb-1 font-weight-bolder font-20' for="image">Title</div>
                             <div class="form-group form-float">
@@ -51,37 +51,30 @@
                             <div class="form-group form-float">
                                 <textarea name="description" cols="30" rows="5" placeholder="Description" class="form-control no-resize" required></textarea>
                             </div>
-                            <div style="margin-left: -13px;" class="col-lg-3 col-md-6 form-group inlineblock">
-                                <label class="font-weight-bolder font-20"> <b>Assign ticket to user</b> </label>
-                                <select name='user_id' required class="form-control show-tick ms search-select" data-placeholder="Select User">
+                            {{-- <div style="margin-left: -13px; with:103%" class="col-lg-12 col-md-6 form-group inlineblock">
+                                <p class="font-weight-bolder font-20"> <b>Multiple Select</b> </p>
+                                <select class="form-control show-tick ms  select2" multiple data-placeholder="Select">
+                                    <option>Mustard</option>
+                                    <option>Ketchup</option>
+                                    <option>Relish</option>
+                                </select>
+                            </div> --}}
+                            <div style="margin-left: -13px;" class="col-lg-6 col-md-6 form-group inlineblock">
+                                <label class="font-weight-bolder font-20"> <b>Project leader</b> </label>
+                                <select style="margin-top: -7px;" name='Assigned_to' required class="form-control show-tick ms search-select " data-placeholder="Select User">
                                     <option></option>
                                     @foreach ($users as $user )
-                                        <option value='{{ $user->id }}'>{{ $user->name }}</option>
+                                        <option value='{{ $user->name }}'>{{ $user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div style="margin-left: -13px;" class="col-lg-3 col-md-6 form-group inlineblock ">
-                                <label class="font-weight-bolder font-20"> <b>Assign ticket to project</b> </label>
-                                <select name='project_id' class="form-control show-tick ms search-select" data-placeholder="Select">
-                                    <option></option>
-                                    @foreach ($projects as $project )
-                                        <option value='{{ $project->id }}'>{{ $project->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-lg-4 col-md-6 inlineblock">
+                            <div style="margin-left: -13px;" class="col-lg-6 col-md-6 form-group inlineblock mt-3">
                                 <label class="font-weight-bolder font-20">Date Time</label>
-                                <div class="input-group masked-input mb-3">
+                                <div class="input-group masked-input ">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="zmdi zmdi-calendar-note"></i></span>
                                     </div>
                                     <input name='end_time' type="text" class="form-control datetime" placeholder="Ex: 31/12/2022 23:59">
-                                </div>
-                            </div>
-                            <div style="margin-left: -15px;" class="col-lg-12 col-md-12">
-                                <div class="card">
-                                    <label class="font-weight-bolder font-20" for="image">Image</label>
-                                    <input type="file" name='image' class="dropify">
                                 </div>
                             </div>
                             <button class="btn btn-raised btn-primary waves-effect" type="submit">Create</button>

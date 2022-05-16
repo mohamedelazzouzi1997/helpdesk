@@ -19,6 +19,9 @@ class CreateProjectsTable extends Migration
             $table->string('priority')->default('low');
             $table->text('description');
             $table->string('status')->default('open');
+            $table->string('created_by');
+            $table->string('Assigned_to');
+            $table->string('end_time')->nullable();
             $table->timestamps();
         });
     }

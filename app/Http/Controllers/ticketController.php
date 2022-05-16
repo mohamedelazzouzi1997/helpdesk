@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Ticket;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -52,9 +53,11 @@ class ticketController extends Controller
     public function create(){
 
         $users = User::all();
+         $projects = Project::all();
 
         return view('project.ticket.create')->with([
             'users' => $users,
+            'projects' => $projects,
         ]);
     }
 
@@ -100,7 +103,8 @@ class ticketController extends Controller
             'image' => $request->image,
             'created_by' => Auth::user()->name,
             'user_id'=> $request->user_id,
-            'end_time' => $request->end_time
+            'end_time' => $request->end_time,
+            'project_id' => $request->project_id
         ]);
         return redirect()->route('show.ticket',$ticket->id)->with([
             'success' => 'ticket created successfully'

@@ -1,11 +1,27 @@
 @extends('layout.app')
 @section('title', 'My Profile')
+@section('page-style')
+<link rel="stylesheet" href="{{asset('assets/plugins/dropify/css/dropify.min.css')}}"/>
+<link rel="stylesheet" href="{{asset('assets/plugins/morrisjs/morris.css')}}"/>
+<link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css')}}"/>
+<link rel="stylesheet" href="{{asset('assets/plugins/multi-select/css/multi-select.css')}}"/>
+<link rel="stylesheet" href="{{asset('assets/plugins/jquery-spinner/css/bootstrap-spinner.css')}}"/>
+<link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css')}}"/>
+<link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-select/css/bootstrap-select.css')}}"/>
+<link rel="stylesheet" href="{{asset('assets/plugins/nouislider/nouislider.min.css')}}"/>
+<link rel="stylesheet" href="{{asset('assets/plugins/select2/select2.css')}}"/>
+<style>
+.input-group-text {
+    padding: 0 .75rem;
+}
+</style>
+@stop
 @section('content')
 <div class="row clearfix">
     <div class="col-xl-12 col-lg-12 col-md-12">
         <div class="card mcard_3">
             <div class="body">
-                <a href="javascript:void(0);"><img src="{{ Auth::user()->image == null ? 'https://ui-avatars.com/api/?color=ff0000&name='.Auth::user()->name : asset('upload/profile/'.Auth::user()->image) }}" class="rounded-circle" alt="profile-image"></a>
+                <img class='rounded-circle' width='200' height="200" src="{{ Auth::user()->image == null ? 'https://ui-avatars.com/api/?color=ff0000&name='.Auth::user()->name : asset('upload/profile/'.Auth::user()->image) }}" class="rounded-circle" alt="profile-image">
                 <h4 class="m-t-10">{{Auth::user()->name}}</h4>
                 <div class="row">
                     <div class="col-12 mb-4">
@@ -28,8 +44,13 @@
                     <form action="{{ route('update.profile',Auth::user()->id) }}" class="form-group" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <input type="file" name="image" class="form-control" placeholder="add image">
-                                                                <div class="modal-footer">
+                            <div style="margin-left: -15px;" class="col-lg-12 col-md-12">
+                                <div class="card">
+                                    <label class="font-weight-bolder font-20" for="image">Image</label>
+                                    <input type="file" name='image' class=" rounded-circle dropify">
+                                </div>
+                            </div>
+                    <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
@@ -45,8 +66,8 @@
                             <li><a href="https://twitter.com/thememakker" title="twitter"><i class="zmdi zmdi-twitter-box"></i></a></li>
                             <li><a href="https://www.instagram.com/thememakker/" title="instagram"><i class="zmdi zmdi-instagram"></i></a></li>
                         </ul>
-                        <a href="https://themeforest.net/user/wrraptheme/portfolio" class="btn btn-danger">Delete Profile</a>
-                        <a href="https://thememakker.com/" class="btn btn-success">Edit Profile</a>
+                        {{-- <a href="https://themeforest.net/user/wrraptheme/portfolio" class="btn btn-danger">Delete Profile</a>
+                        <a href="https://thememakker.com/" class="btn btn-success">Edit Profile</a> --}}
                     </div>
                     <div class="col-4">
                         <small>Experience</small>
@@ -115,4 +136,16 @@
         </div>
     </div>
 </div>
+@stop
+@section('page-script')
+<script src="{{asset('assets/plugins/dropify/js/dropify.min.js')}}"></script>
+<script src="{{asset('assets/js/pages/forms/dropify.js')}}"></script>
+<script src="{{asset('assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery-inputmask/jquery.inputmask.bundle.js')}}"></script>
+<script src="{{asset('assets/plugins/multi-select/js/jquery.multi-select.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery-spinner/js/jquery.spinner.js')}}"></script>
+<script src="{{asset('assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+<script src="{{asset('assets/plugins/nouislider/nouislider.js')}}"></script>
+<script src="{{asset('assets/plugins/select2/select2.min.js')}}"></script>
+<script src="{{asset('assets/js/pages/forms/advanced-form-elements.js')}}"></script>
 @stop

@@ -70,7 +70,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="zmdi zmdi-search"></i></span>
                         </div>
-                        <input name='search' type="search" class="form-control datetime" placeholder="search">
+                        <input value=' {{ request('search') }}' name='search' type="search" class="form-control datetime" placeholder="search">
                     </div>
                     </div>
 

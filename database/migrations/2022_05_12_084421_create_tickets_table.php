@@ -22,7 +22,7 @@ class CreateTicketsTable extends Migration
             $table->string('image')->nullable();
             // $table->unsignedBigInteger('project_id');
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('project_id')->constrained('projects')->onUpdate('cascade')->onDelete('cascade')->nullable();
+            $table->foreignId('project_id')->nullable() ->constrained('projects')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

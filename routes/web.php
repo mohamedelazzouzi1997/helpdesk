@@ -19,10 +19,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/edit/ticket/{id}', 'ticketController@edit')->name('edit.ticket');
+
     Route::get('/', function () {return view('layout.app');})->name('dashboard');
     Route::get('/user/profile', function () {return view('profile.profile');})->name('profile');
-    Route::get('/Projects', function () {return view('project.projects');})->name('Projects');
+
 
     //tickets route
     Route::get('/tickets','ticketController@index')->name('tickets');
@@ -33,8 +33,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/resolve/ticket/{id}', 'ticketController@resolve')->name('resolve.ticket');
     Route::get('/edit/ticket/{id}', 'ticketController@edit')->name('edit.ticket');
     Route::get('/delete/ticket/{id}', 'ticketController@delete')->name('delete.ticket');
-
     //tickets route
+
+    //project routes
+    Route::get('/projects', 'projectController@index')->name('projects');
+    Route::get('/create/project', 'projectController@create')->name('create.project');
+    Route::post('/projects', 'projectController@store')->name('store.project');
+    //project route
 
     Route::put('/profile/{id}', 'userController@update')->name('update.profile');
 

@@ -6,9 +6,9 @@
     }
 @endphp
 
-@if($comments->count() < 1)
+{{-- @if($comments->count() < 1)
     <div class="alert alert-warning">@lang('comments::comments.there_are_no_comments')</div>
-@endif
+@endif --}}
 
 <div>
     @php

@@ -1,278 +1,151 @@
 @extends('layout.app')
 @section('title', 'Project List')
 @section('parentPageTitle', 'Project')
+@section('page-style')
+<link rel="stylesheet" href="{{asset('assets/css/treeview.css')}}"/>
+@stop
 @section('content')
 <div class="row clearfix">
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card state_w1">
+            <div class="body d-flex justify-content-between">
+                <div>
+                    <h5>{{ $total_projects->count() }}</h5>
+                    <span>Total Projects</span>
+                </div>
+                <div class="sparkline" data-type="bar" data-width="97%" data-height="55px" data-bar-Width="3" data-bar-Spacing="5" data-bar-Color="#b80dbf">1,5,2,9,4,7,2,1</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card state_w1">
+            <div class="body d-flex justify-content-between">
+                <div>
+                    <h5>{{ $in_progress_projects->count() }}</h5>
+                    <span>in progress</span>
+                </div>
+                <div class="sparkline" data-type="bar" data-width="97%" data-height="55px" data-bar-Width="3" data-bar-Spacing="5" data-bar-Color="#FFC107">5,2,3,7,6,4,8,1</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card state_w1">
+            <div class="body d-flex justify-content-between">
+                <div>
+                    <h5>{{ $open_projects->count() }}</h5>
+                    <span>open</span>
+                </div>
+                <div class="sparkline" data-type="bar" data-width="97%" data-height="55px" data-bar-Width="3" data-bar-Spacing="5" data-bar-Color="#46b6fe">8,2,6,5,1,4,4,3</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card state_w1">
+            <div class="body d-flex justify-content-between">
+                <div>
+                    <h5>{{ $closed_projects->count() }}</h5>
+                    <span>closed</span>
+                </div>
+                <div class="sparkline" data-type="bar" data-width="97%" data-height="55px" data-bar-Width="3" data-bar-Spacing="5" data-bar-Color="#ee2558">4,4,3,9,2,1,5,7</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card state_w1">
+            <div class="body d-flex justify-content-between">
+                <div>
+                    <h5>{{ $resolved_projects->count() }}</h5>
+                    <span>Resolve</span>
+                </div>
+                <div class="sparkline" data-type="bar" data-width="97%" data-height="55px" data-bar-Width="3" data-bar-Spacing="5" data-bar-Color="#04BE5B">7,5,3,8,4,6,2,9</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row clearfix">
     <div class="col-md-12 col-sm-12 col-xs-12">
+
         <div class="card project_list">
             <div class="table-responsive">
-                <table class="table table-hover c_table theme-color">
-                    <thead>
-                        <tr>
-                            <th style="width:50px;">Assigned</th>
-                            <th></th>
-                            <th>Name</th>
-                            <th class="hidden-md-down">Team</th>
-                            <th class="hidden-md-down" width="150px">Status</th>
-                            <th>Priority</th>
-                            <th>Due Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <img class="rounded avatar" src="{{asset('assets/images/xs/avatar1.jpg')}}" alt="">
-                            </td>
-                            <td>
-                                <a class="single-user-name" href="javascript:void(0);">Jonathan Deo</a><br>
-                                <small>Project Lead</small>
-                            </td>
-                            <td>
-                                <strong>eCommerce Website</strong><br>
-                                <small>Cost: $215</small>
-                            </td>
-                            <td class="hidden-md-down">
-                                <ul class="list-unstyled team-info margin-0">
-                                    <li><img src="{{asset('assets/images/xs/avatar2.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar3.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar4.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar6.jpg')}}" alt="Avatar"></li>
-                                </ul>
-                            </td>
-                            <td class="hidden-md-down">
-                                <div class="progress">
-                                    <div class="progress-bar l-blue" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%;"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge badge-info">Medium</span></td>
-                            <td>25 Dec 2019</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="rounded avatar" src="{{asset('assets/images/xs/avatar2.jpg')}}" alt="">
-                            </td>
-                            <td>
-                                <a class="single-user-name" href="javascript:void(0);">Jannie Dvis</a><br>
-                                <small>Design Lead</small>
-                            </td>
-                            <td>
-                                <strong>One Page Landing</strong><br>
-                                <small>Cost: $100</small>
-                            </td>
-                            <td class="hidden-md-down">
-                                <ul class="list-unstyled team-info margin-0">
-                                    <li><img src="{{asset('assets/images/xs/avatar5.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar6.jpg')}}" alt="Avatar"></li>
-                                </ul>
-                            </td>
-                            <td class="hidden-md-down">
-                                <div class="progress">
-                                    <div class="progress-bar l-green" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%;"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge badge-success">High</span></td>
-                            <td>21 Dec 2019</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="rounded avatar" src="{{asset('assets/images/xs/avatar10.jpg')}}" alt="">
-                            </td>
-                            <td>
-                                <a class="single-user-name" href="javascript:void(0);">Petere Husen</a><br>
-                                <small>Swift Developer</small>
-                            </td>
-                            <td>
-                                <strong>iOS Game</strong><br>
-                                <small>Cost: $890</small>
-                            </td>
-                            <td class="hidden-md-down">
-                                <ul class="list-unstyled team-info margin-0">
-                                    <li><img src="{{asset('assets/images/xs/avatar7.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar8.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar9.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar2.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar3.jpg')}}" alt="Avatar"></li>
-                                </ul>
-                            </td>
-                            <td class="hidden-md-down">
-                                <div class="progress">
-                                    <div class="progress-bar l-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge badge-info">Medium</span></td>
-                            <td>26 Dec 2019</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="rounded avatar" src="{{asset('assets/images/xs/avatar4.jpg')}}" alt="">
-                            </td>
-                            <td>
-                                <a class="single-user-name" href="javascript:void(0);">John Deo</a><br>
-                                <small>UI UX Lead</small>
-                            </td>
-                            <td>
-                                <strong>Digital Marketing</strong><br>
-                                <small>Cost: $350</small>
-                            </td>
-                            <td class="hidden-md-down">
-                                <ul class="list-unstyled team-info margin-0">
-                                    <li><img src="{{asset('assets/images/xs/avatar2.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar3.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar6.jpg')}}" alt="Avatar"></li>
-                                </ul>
-                            </td>
-                            <td class="hidden-md-down">
-                                <div class="progress">
-                                    <div class="progress-bar l-amber" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" style="width: 28%;"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge badge-warning">Panding</span></td>
-                            <td>12 Jan 2019</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="rounded avatar" src="{{asset('assets/images/xs/avatar5.jpg')}}" alt="">
-                            </td>
-                            <td>
-                                <a class="single-user-name" href="javascript:void(0);">Emma Welson</a><br>
-                                <small>Angular Developer</small>
-                            </td>
-                            <td>
-                                <strong>Hospital Admin</strong><br>
-                                <small>Hire: $45 Per Hour</small>
-                            </td>
-                            <td class="hidden-md-down">
-                                <ul class="list-unstyled team-info  margin-0">
-                                    <li><img src="{{asset('assets/images/xs/avatar8.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar3.jpg')}}" alt="Avatar"></li>
-                                </ul>
-                            </td>
-                            <td class="hidden-md-down">
-                                <div class="progress">
-                                    <div class="progress-bar l-coral" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%;"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge badge-primary">Low</span></td>
-                            <td>20 Jan 2019</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="rounded avatar" src="{{asset('assets/images/xs/avatar2.jpg')}}" alt="">
-                            </td>
-                            <td>
-                                <a class="single-user-name" href="javascript:void(0);">Jannie Dvis</a><br>
-                                <small>Design Lead</small>
-                            </td>
-                            <td>
-                                <strong>One Page Landing</strong><br>
-                                <small>Cost: $100</small>
-                            </td>
-                            <td class="hidden-md-down">
-                                <ul class="list-unstyled team-info margin-0">
-                                    <li><img src="{{asset('assets/images/xs/avatar5.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar6.jpg')}}" alt="Avatar"></li>
-                                </ul>
-                            </td>
-                            <td class="hidden-md-down">
-                                <div class="progress">
-                                    <div class="progress-bar l-green" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%;"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge badge-success">High</span></td>
-                            <td>21 Dec 2019</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="rounded avatar" src="{{asset('assets/images/xs/avatar10.jpg')}}" alt="">
-                            </td>
-                            <td>
-                                <a class="single-user-name" href="javascript:void(0);">Petere Husen</a><br>
-                                <small>Swift Developer</small>
-                            </td>
-                            <td>
-                                <strong>iOS Game</strong><br>
-                                <small>Cost: $890</small>
-                            </td>
-                            <td class="hidden-md-down">
-                                <ul class="list-unstyled team-info margin-0">
-                                    <li><img src="{{asset('assets/images/xs/avatar9.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar2.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar3.jpg')}}" alt="Avatar"></li>
-                                </ul>
-                            </td>
-                            <td class="hidden-md-down">
-                                <div class="progress">
-                                    <div class="progress-bar l-blue" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge badge-info">Medium</span></td>
-                            <td>26 Dec 2019</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="rounded avatar" src="{{asset('assets/images/xs/avatar4.jpg')}}" alt="">
-                            </td>
-                            <td>
-                                <a class="single-user-name" href="javascript:void(0);">John Deo</a><br>
-                                <small>UI UX Lead</small>
-                            </td>
-                            <td>
-                                <strong>Digital Marketing</strong><br>
-                                <small>Cost: $350</small>
-                            </td>
-                            <td class="hidden-md-down">
-                                <ul class="list-unstyled team-info margin-0">
-                                    <li><img src="{{asset('assets/images/xs/avatar2.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar6.jpg')}}" alt="Avatar"></li>
-                                </ul>
-                            </td>
-                            <td class="hidden-md-down">
-                                <div class="progress">
-                                    <div class="progress-bar l-amber" role="progressbar" aria-valuenow="28" aria-valuemin="0" aria-valuemax="100" style="width: 28%;"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge badge-warning">Panding</span></td>
-                            <td>12 Jan 2019</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="rounded avatar" src="{{asset('assets/images/xs/avatar5.jpg')}}" alt="">
-                            </td>
-                            <td>
-                                <a class="single-user-name" href="javascript:void(0);">Emma Welson</a><br>
-                                <small>Angular Developer</small>
-                            </td>
-                            <td>
-                                <strong>Hospital Admin</strong><br>
-                                <small>Hire: $45 Per Hour</small>
-                            </td>
-                            <td class="hidden-md-down">
-                                <ul class="list-unstyled team-info  margin-0">
-                                    <li><img src="{{asset('assets/images/xs/avatar8.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar3.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar4.jpg')}}" alt="Avatar"></li>
-                                    <li><img src="{{asset('assets/images/xs/avatar2.jpg')}}" alt="Avatar"></li>
-                                </ul>
-                            </td>
-                            <td class="hidden-md-down">
-                                <div class="progress">
-                                    <div class="progress-bar l-coral" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%;"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge badge-primary">Low</span></td>
-                            <td>20 Jan 2019</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <form action='{{ route('projects') }}' class="form-group" method="GET">
+                    @csrf
+                    <div class="col-lg-4 col-md-6 inlineblock">
+                    <div style="margin-left: -15px;" class="input-group masked-input mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="zmdi zmdi-search"></i></span>
+                        </div>
+                        <input value=' {{ request('search') }}' name='search' type="search" class="form-control datetime" placeholder="search">
+                    </div>
+                    </div>
+                    <button style="margin-bottom: 10px;" type="submit" class="btn btn-primary">filter</button>
+                </form>
+                        @foreach ($projects as $project )
+                                <details >
+                                    <summary>#{{ $project->id }}  {{ $project->title }} <small class='text-white'>{{ date('d/m/Y h:s', strtotime($project->created_at)); }}</small></summary>
+                                    <div class="folder">
+                                        <a href="#">description</a>
+                                        <details >
+                                            <summary>Tickets</summary>
+                                            <div class="folder">
+                                                @forelse (  $project->tickets as $ticket  )
+                                                    <details>
+                                                        <summary>{{ $ticket->title }}<small class='text-white'> {{ date('d/m/Y h:s', strtotime($ticket->created_at)); }}</small></summary>
+                                                        <div class="folder">
+
+                                                        <a class="btn btn-warning-block inlineblock" href="{{ route('show.ticket',$ticket->id) }}"><strong>#{{ $ticket->id }} </strong>More Detail</a>
+                                                            @if ($ticket->status =='open')
+                                                            <span class="badge badge-primary">{{ $ticket->status }}</span>
+
+                                                            @elseif ($ticket->status =='in progress')
+                                                            <span class="badge badge-warning">{{ $ticket->status }}</span>
+
+                                                            @elseif ($ticket->status =='resolve')
+                                                            <span class="badge badge-success">{{ $ticket->status }}</span>
+
+                                                            @else
+                                                            <span class="badge badge-danger">{{ $ticket->status }}</span>
+
+                                                            @endif
+                                                            @if ($ticket->priority =='low')
+                                                            <span class="badge badge-primary">{{ $ticket->priority }}</span>
+
+                                                            @elseif ($ticket->priority =='medium')
+                                                            <span class="badge badge-warning">{{ $ticket->priority }}</span>
+
+                                                            @else
+                                                            <span class="badge badge-danger">{{ $ticket->priority }}</span>
+
+                                                            @endif
+                                                            <div class="inlineblock d-flex justify-content-end"><small style='color:black'>{{ date('d/m/Y h:m', strtotime($ticket->end_time));  }}</small></div>
+                                                        <p class="p-0.5">{{ $ticket->description }}</p>
+                                                        <div class="body">
+                                                            <ul class="comment-reply list-unstyled">
+                                                                @comments(['model' => $ticket])
+                                                            </ul>
+                                                        </div>
+                                                        </div>
+                                                    </details>
+                                                @empty
+                                                    no ticket for this project
+                                                @endforelse
+                                            </div>
+                                        </details>
+                                    </div>
+                                </details>
+                        @endforeach
+
+
+
             </div>
-            <ul class="pagination pagination-primary mt-4">
-                <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0);">4</a></li>
-                <li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
-            </ul>
+            <div class="mt-3 d-flex justify-content-center">
+                {{$projects->links()}}
+            </div>
         </div>
     </div>
 </div>
 @stop
+@section('page-script')
+<script src="{{asset('assets/bundles/sparkline.bundle.js')}}"></script>
+<script src="{{asset('assets/js/pages/charts/sparkline.js')}}"></script>
+@stop
+

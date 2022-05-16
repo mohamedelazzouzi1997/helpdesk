@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Project;
 use App\EloquentFilters\NameFilter;
 use Laravelista\Comments\Commentable;
 use Illuminate\Database\Eloquent\Model;
@@ -32,5 +33,10 @@ class Ticket extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
     }
 }
