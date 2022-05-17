@@ -4,27 +4,28 @@
     $markdown->setSafeMode(true);
 @endphp
 
-<div id="comment-{{ $comment->getKey() }}" class="media">
+<div style="margin-bottom: -23px;" id="comment-{{ $comment->getKey() }}" class="media">
     <img width="50" height="50"class="mr-3 rounded-circle" src="{{ $comment->commenter->image == null ? 'https://ui-avatars.com/api/?color=ff0000&name='.$comment->commenter->name : asset('upload/profile/'.$comment->commenter->image) }}" alt="{{ $comment->commenter->name ?? $comment->guest_name }} Avatar">
     <div class="media-body">
-        <h5 class="mt-0 mb-1"><span class='text-primary font-weight-bolder font-20'>{{ $comment->commenter->name ?? $comment->guest_name }}</span> <small class="text-muted font-14">- {{ $comment->created_at->diffForHumans() }}</small></h5>
-        <div class='text-black' style="white-space: pre-wrap;">{!! $markdown->line($comment->comment) !!}</div>
 
-        <div>
+        <div class="">
+            <h5 class="mt-0 mb-1 float-left"><span class='text-primary font-weight-bolder font-20'>{{ $comment->commenter->name ?? $comment->guest_name }}</span> <small class="text-muted font-14">- {{ $comment->created_at->diffForHumans() }}</small></h5>
             @can('reply-to-comment', $comment)
                 <button data-toggle="modal" data-target="#reply-modal-{{ $comment->getKey() }}" class="btn btn-sm btn-muted text-uppercase">@lang('comments::comments.reply')</button>
             @endcan
             @can('edit-comment', $comment)
-                <button data-toggle="modal" data-target="#comment-modal-{{ $comment->getKey() }}" class="btn btn-sm btn-link  text-uppercase">@lang('comments::comments.edit')</button>
+                <button data-toggle="modal" data-target="#comment-modal-{{ $comment->getKey() }}" class="float-right btn btn-sm btn-warning  text-uppercase">@lang('comments::comments.edit')</button>
             @endcan
             @can('delete-comment', $comment)
-                <a href="{{ route('comments.destroy', $comment->getKey()) }}" onclick="event.preventDefault();document.getElementById('comment-delete-form-{{ $comment->getKey() }}').submit();" class="btn btn-sm btn-link text-danger text-uppercase">@lang('comments::comments.delete')</a>
+                <a  href="{{ route('comments.destroy', $comment->getKey()) }}" onclick="event.preventDefault();document.getElementById('comment-delete-form-{{ $comment->getKey() }}').submit();" class="float-right btn btn-sm btn-danger  text-uppercase">@lang('comments::comments.delete')</a>
                 <form id="comment-delete-form-{{ $comment->getKey() }}" action="{{ route('comments.destroy', $comment->getKey()) }}" method="POST" style="display: none;">
                     @method('DELETE')
                     @csrf
                 </form>
             @endcan
         </div>
+        <div class="clearfix mb-2"></div>
+        <div class='text-black text-break' style="white-space: pre-wrap;">{!! $markdown->line($comment->comment) !!}</div>
         <hr>
         @can('edit-comment', $comment)
             <div class="modal fade" id="comment-modal-{{ $comment->getKey() }}" tabindex="-1" role="dialog">

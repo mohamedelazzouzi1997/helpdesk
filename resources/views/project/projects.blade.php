@@ -74,7 +74,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="zmdi zmdi-search"></i></span>
                         </div>
-                        <input value=' {{ request('search') }}' name='search' type="search" class="form-control datetime" placeholder="search">
+                        <input placeholder='id / title / status' value=' {{ request('search') }}' name='search' type="search" class="form-control datetime" placeholder="search">
                     </div>
                     </div>
                     <button style="margin-bottom: 10px;" type="submit" class="btn btn-primary">filter</button>
@@ -113,61 +113,20 @@
                                             <small  style='color:rgb(61, 18, 18)'>{{ date('d/m/Y h:m', strtotime($project->end_time));  }}</small>
                                         </div>
                                         <div class='clearfix'></div>
-                                        <p class="p-0.5">{{ $project->description }}</p>
+                                        <p  class="p-0.5 text-black">{{ $project->description }}</p>
                                         <details >
                                             <summary>Tickets > {{ $project->tickets->count() }}</summary>
                                             <div class="folder">
-                                                @forelse (  $project->tickets as $ticket  )
-                                                    <details>
-                                                        <summary>#{{ $ticket->id }} {{ $ticket->title }}<small class='text-white float-right'> {{ date('d/m/Y h:s', strtotime($ticket->created_at)); }}</small></summary>
-                                                        <div class="folder">
-                                                             <div class="inlineblock float-left">
-                                                                <a class="btn btn-warning-block inlineblock" href="{{ route('show.ticket',$ticket->id) }}"><strong>#{{ $ticket->id }} </strong>More Detail</a>
-                                                                @if ($ticket->status =='open')
-                                                                <span class="badge badge-primary">{{ $ticket->status }}</span>
-
-                                                                @elseif ($ticket->status =='in progress')
-                                                                <span class="badge badge-warning">{{ $ticket->status }}</span>
-
-                                                                @elseif ($ticket->status =='resolve')
-                                                                <span class="badge badge-success">{{ $ticket->status }}</span>
-
-                                                                @else
-                                                                <span class="badge badge-danger">{{ $ticket->status }}</span>
-
-                                                                @endif
-                                                                @if ($ticket->priority =='low')
-                                                                <span class="badge badge-primary">{{ $ticket->priority }}</span>
-
-                                                                @elseif ($ticket->priority =='medium')
-                                                                <span class="badge badge-warning">{{ $ticket->priority }}</span>
-
-                                                                @else
-                                                                <span class="badge badge-danger">{{ $ticket->priority }}</span>
-
-                                                                @endif
-                                                            </div>
-                                                            <div class="float-right"><small style='color:black'>{{ date('d/m/Y h:m', strtotime($ticket->end_time));  }}</small></div></br>
-                                                            <div class='clearfix'></div>
-                                                        <p class="p-0.5">{{ $ticket->description }}</p>
-                                                        <div class="body">
-                                                            <ul class="comment-reply list-unstyled">
-                                                                @comments(['model' => $ticket])
-                                                            </ul>
-                                                        </div>
-                                                        </div>
-                                                    </details>
-                                                @empty
-                                                    no ticket for this project
-                                                @endforelse
+                                                @if (count($project->tickets) )
+                                                    @include('project.project_tickets',$project->tickets)
+                                                @else
+                                                 no ticket for this project yet
+                                                @endif
                                             </div>
                                         </details>
                                     </div>
                                 </details>
                         @endforeach
-
-
-
             </div>
             <div class="mt-3 d-flex justify-content-center">
                 {{$projects->links()}}

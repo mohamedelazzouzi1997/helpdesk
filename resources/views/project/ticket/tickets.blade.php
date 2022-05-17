@@ -70,7 +70,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="zmdi zmdi-search"></i></span>
                         </div>
-                        <input value=' {{ request('search') }}' name='search' type="search" class="form-control datetime" placeholder="search">
+                        <input placeholder='id / title / status' value=' {{ request('search') }}' name='search' type="search" class="form-control datetime" placeholder="search">
                     </div>
                     </div>
 
@@ -80,7 +80,6 @@
                     <thead class='text-center'>
                         <tr>
                             <th>#</th>
-                            <th>description</th>
                             <th>Title</th>
                             <th>Created by</th>
                             <th>Date</th>
@@ -98,7 +97,7 @@
                                 <tr>
 
                                         <td><a class="btn btn-link" href="{{ route('show.ticket',$ticket->id) }}"><strong>{{ $ticket->id }}</strong></a></td>
-                                        <td><a class="btn btn-link" href="{{ route('show.ticket',$ticket->id) }}">{{ $ticket->description }}</a></td>
+                                        {{-- <td><a class="btn btn-link" href="{{ route('show.ticket',$ticket->id) }}">{{ $ticket->description }}</a></td> --}}
                                         <td><a class="btn btn-link" href="{{ route('show.ticket',$ticket->id) }}">{{ $ticket->title }}</a></td>
                                         <td><a class="btn btn-link" href="{{ route('show.ticket',$ticket->id) }}">{{ $ticket->created_by }}</a></td>
                                         <td><a class="btn btn-link" href="{{ route('show.ticket',$ticket->id) }}">{{ date('d/m/Y h:m', strtotime($ticket->created_at)); }}</a></td>

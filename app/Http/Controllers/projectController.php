@@ -30,8 +30,6 @@ class projectController extends Controller
             $projects = Project::latest()->paginate(10);
         }
 
-
-
         $total_projects = Project::all();
         $in_progress_projects = Project::where('status','in progress')->get();
         $open_projects = Project::where('status','open')->get();
@@ -48,6 +46,22 @@ class projectController extends Controller
         ]);
     }
 
+
+    public function show($id){
+
+        $project = Project::find($id);
+
+        $assignet_to = User::where('name', $project->Assigned_to)->first();
+        $user_project_count = Project::where('Assigned_to', $assignet_to)->get();
+
+
+        return view('project.project')->with([
+            'project' => $project,
+            'assignet_to' => $assignet_to,
+            'user_project_count' => $user_project_count
+        ]);
+
+    }
 
 
     public function create(){

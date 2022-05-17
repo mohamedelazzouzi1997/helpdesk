@@ -3,7 +3,6 @@
 @section('parentPageTitle', 'Project')
 @section('page-style')
 <link rel="stylesheet" href="{{asset('assets/plugins/dropify/css/dropify.min.css')}}"/>
-<link rel="stylesheet" href="{{asset('assets/plugins/dropify/css/dropify.min.css')}}"/>
 <link rel="stylesheet" href="{{asset('assets/plugins/morrisjs/morris.css')}}"/>
 <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.css')}}"/>
 <link rel="stylesheet" href="{{asset('assets/plugins/multi-select/css/multi-select.css')}}"/>
@@ -124,8 +123,6 @@
 </div>
 @stop
 @section('page-script')
-<script src="{{asset('assets/plugins/dropify/js/dropify.min.js')}}"></script>
-<script src="{{asset('assets/js/pages/forms/dropify.js')}}"></script>
 <script src="{{asset('assets/plugins/dropify/js/dropify.min.js')}}"></script>
 <script src="{{asset('assets/js/pages/forms/dropify.js')}}"></script>
 <script src="{{asset('assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.js')}}"></script>

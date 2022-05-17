@@ -61,10 +61,11 @@
                     </div>
                 </div>
                 </div>
-                        <ul class="social-links list-unstyled">
-                            <li><a href="https://www.facebook.com/thememakkerteam" title="facebook" ><i class="zmdi zmdi-facebook-box"></i></a></li>
-                            <li><a href="https://twitter.com/thememakker" title="twitter"><i class="zmdi zmdi-twitter-box"></i></a></li>
-                            <li><a href="https://www.instagram.com/thememakker/" title="instagram"><i class="zmdi zmdi-instagram"></i></a></li>
+                        <ul class="ml-4 social-links list-unstyled">
+                            <li class="mr-3"><strong class='badge badge-primary'>Total:-</strong> {{ $user_ticket_count->count() }}</li>
+                            <li class="mr-3"><strong class='badge badge-danger'>Open:-</strong> {{ $user_ticket_open->count() }}</li>
+                            <li class="mr-3"><strong class='badge badge-success'>Closed:-</strong> {{ $user_ticket_close->count() }}</li>
+                             <li class="mr-3"><strong class='badge badge-warning'>Closed:-</strong> {{ $user_ticket_in_progress->count() }}</li>
                         </ul>
                         {{-- <a href="https://themeforest.net/user/wrraptheme/portfolio" class="btn btn-danger">Delete Profile</a>
                         <a href="https://thememakker.com/" class="btn btn-success">Edit Profile</a> --}}
