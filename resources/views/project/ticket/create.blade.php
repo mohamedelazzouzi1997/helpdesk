@@ -60,15 +60,6 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div style="margin-left: -13px;" class="col-lg-3 col-md-6 form-group inlineblock ">
-                                <label class="font-weight-bolder font-20"> <b>Assign ticket to project</b> </label>
-                                <select name='project_id' class="form-control show-tick ms search-select" data-placeholder="Select">
-                                    <option></option>
-                                    @foreach ($projects as $project )
-                                        <option value='{{ $project->id }}'>{{ $project->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
                             <div class="col-lg-4 col-md-6 inlineblock">
                                 <label class="font-weight-bolder font-20">Date Time</label>
                                 <div class="input-group masked-input mb-3">

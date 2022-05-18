@@ -30,7 +30,7 @@
             </div>
             <div class="float-right"><small style='color:black'>{{ date('d/m/Y h:m', strtotime($ticket->end_time));  }}</small></div></br>
             <div class='clearfix'></div>
-        <p class="text-black p-0.5">{{ $ticket->description }}</p>
+        <p class="text-black m-2 p-0.5">{{ $ticket->description }}</p>
         <div class="body">
             <ul class="comment-reply list-unstyled">
                 @comments(['model' => $ticket])
@@ -38,6 +38,5 @@
         </div>
         </div>
     </details>
-
 @endforeach
 

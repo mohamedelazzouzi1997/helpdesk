@@ -20,8 +20,5 @@ class Project extends Model
         'end_time'
     ];
 
-        public function tickets(){
 
-        return $this->hasMany(Ticket::class);
-    }
 }

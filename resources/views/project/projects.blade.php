@@ -113,7 +113,7 @@
                                             <small  style='color:rgb(61, 18, 18)'>{{ date('d/m/Y h:m', strtotime($project->end_time));  }}</small>
                                         </div>
                                         <div class='clearfix'></div>
-                                        <p  class="p-0.5 text-black">{{ $project->description }}</p>
+                                        <p  class="p-0.5 text-black m-2">{{ $project->description }}</p>
                                         <details >
                                             <summary>Tickets > {{ $project->tickets->count() }}</summary>
                                             <div class="folder">

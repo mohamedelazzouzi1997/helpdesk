@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     //tickets route
     Route::get('/tickets','ticketController@index')->name('tickets');
     Route::get('/create/ticket', 'ticketController@create')->name('create.ticket');
+    Route::get('/create/Sub/ticket/{id}', 'ticketController@createSubTicket')->name('create.sub.ticket');
     Route::post('/tickets', 'ticketController@store')->name('store.ticket');
     Route::get('/ticket/{id}', 'ticketController@show')->name('show.ticket');
     Route::put('/update/ticket/{id}', 'ticketController@update')->name('update.ticket');
@@ -35,12 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/delete/ticket/{id}', 'ticketController@delete')->name('delete.ticket');
     //tickets route
 
-    //project routes
-    Route::get('/projects', 'projectController@index')->name('projects');
-    Route::get('/create/project', 'projectController@create')->name('create.project');
-    Route::post('/projects', 'projectController@store')->name('store.project');
-    Route::get('/project/{id}', 'projectController@show')->name('show.project');
-    //project route
+    // //project routes
+    // Route::get('/projects', 'projectController@index')->name('projects');
+    // Route::get('/create/project', 'projectController@create')->name('create.project');
+    // Route::post('/projects', 'projectController@store')->name('store.project');
+    // Route::get('/project/{id}', 'projectController@show')->name('show.project');
+    // //project route
 
     Route::put('/profile/{id}', 'userController@update')->name('update.profile');
 

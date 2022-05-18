@@ -15,21 +15,22 @@ class ticketController extends Controller
 
     public function index(Request $request){
 
-        (string) $value = $request->search;
+        // (string) $value = $request->search;
 
-        if($request->has('search')){
-            $tickets = Ticket::where('status','LIKE', '%'.$value.'%')
-                                ->orwhere('id',$value)
-                                ->orwhere('title','LIKE', '%'.$value.'%')
-                                ->orwhere('priority','LIKE', '%'.$value.'%')
-                                ->orwhere('created_by','LIKE', '%'.$value.'%')
-                                // ->join('users', 'users.id', '=', 'tickets.user_id')->where('users.name','like','%'.$value.'%')
-                                ->paginate(5);
+        // if($request->has('search')){
+        //     $tickets = Ticket::where('status','LIKE', '%'.$value.'%')
+        //                         ->orwhere('id',$value)
+        //                         ->orwhere('title','LIKE', '%'.$value.'%')
+        //                         ->orwhere('priority','LIKE', '%'.$value.'%')
+        //                         ->orwhere('created_by','LIKE', '%'.$value.'%')
+        //                         // ->join('users', 'users.id', '=', 'tickets.user_id')->where('users.name','like','%'.$value.'%')
+        //                         ->paginate(5);
 
 
-        }else{
-            $tickets = Ticket::latest()->paginate(5);
-        }
+        // }else{
+        //     $tickets = Ticket::latest()->paginate(5);
+        // }
+        $tickets = Ticket::tree()->get()->toTree();
 
 
 
@@ -53,11 +54,20 @@ class ticketController extends Controller
     public function create(){
 
         $users = User::all();
-         $projects = Project::all();
 
         return view('project.ticket.create')->with([
             'users' => $users,
-            'projects' => $projects,
+        ]);
+    }
+
+    public function createSubTicket($id){
+
+        $parent_id = $id;
+        $users = User::all();
+
+        return view('project.ticket.createSubTicket')->with([
+            'users' => $users,
+            'parent_id' => $parent_id
         ]);
     }
 
@@ -83,12 +93,6 @@ class ticketController extends Controller
      public function store(Request $request){
 
 
-        // $total_tickets = Ticket::all();
-        // $pending_tickets = Ticket::where('status','pending')->get();
-        // $open_tickets = Ticket::where('status','open')->get();
-        // $closed_tickets = Ticket::where('status','close')->get();
-        // $resolved_tickets = Ticket::where('status','resolve')->get();
-
         $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -104,23 +108,11 @@ class ticketController extends Controller
             'created_by' => Auth::user()->name,
             'user_id'=> $request->user_id,
             'end_time' => $request->end_time,
-            'project_id' => $request->project_id
+            'parent_id' => $request->parent_id
         ]);
         return redirect()->route('show.ticket',$ticket->id)->with([
             'success' => 'ticket created successfully'
         ]);
-
-        // $tickets = Ticket::latest()->paginate(5);
-
-        // return view('project.ticket.tickets')->with([
-        //     'tickets' => $tickets,
-        //     'success' => 'ticket created successfully',
-        //     'total_tickets' => $total_tickets,
-        //     'pending_tickets' => $pending_tickets,
-        //     'closed_tickets' => $closed_tickets,
-        //     'resolved_tickets' => $resolved_tickets,
-        //     'open_tickets' => $open_tickets
-        // ]);
 
     }
 
@@ -130,6 +122,8 @@ class ticketController extends Controller
             $validated = $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'user_id' => 'required',
+            'end_time' => 'required',
         ]);
 
         $ticket = Ticket::find($id);

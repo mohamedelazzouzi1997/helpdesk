@@ -9,11 +9,13 @@ use Laravelista\Comments\Commentable;
 use Illuminate\Database\Eloquent\Model;
 use Abdrzakoxa\EloquentFilter\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
+
 
 
 class Ticket extends Model
 {
-    use HasFactory,Commentable,Filterable;
+    use HasFactory,Commentable,HasRecursiveRelationships;
 
       protected $fillable = [
         'title',
@@ -21,22 +23,16 @@ class Ticket extends Model
         'status',
         'image',
         'priority',
-        'project_id',
+        'parent_id',
         'user_id',
         'created_by',
         'end_time'
     ];
-        protected $filters = [
-        NameFilter::class,
-    ];
+
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function project()
-    {
-        return $this->belongsTo(Project::class);
-    }
 }
