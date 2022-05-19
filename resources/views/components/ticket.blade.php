@@ -1,36 +1,10 @@
 
 @props(['ticket'])
-
-<li data-jstree='{ "opened" : false }'>{{ $ticket->title }} <span href=""><a href="{{ route('create.sub.ticket',$ticket->id) }}"><i class="fa fa-plus"></i></a></span>
+<li><i class="fa fa-folder-open"> </i><a class="ml-3" href="{{ route('show.ticket',$ticket->id) }}"> {{ $ticket->title }}</a>
+    <small>{{ date('d/m/Y h:s', strtotime($ticket->created_at)); }}</small><a class="float-left text-success" href="{{ route('create.sub.ticket',$ticket->id) }}"><i class="fa fa-circle-plus"></i></a>
     <ul>
-        @forelse ( $ticket->children as $child)
-            <x-ticket :ticket='$child' ></x-ticket>
-        @empty
-            <div class="body">
-                <ul class="comment-reply list-unstyled">
-                    @comments(['model' => $ticket])
-                </ul>
-            </div>
-        @endforelse
-    </ul>
-</li>
-
-
-
-{{-- <details >
-    <summary class='inlineblock'><i class="fa fa-folder-open"></i>  {{ $ticket->title }} <a href="{{ route('create.sub.ticket',$ticket->id) }}" class="btn btn-link pl-2"><i class="fa fa-plus text-primary"></i></a>
-        <div class='text-black float-right'>
-         <a class="btn btn-link text-black" href="{{ route('show.ticket',$ticket->id) }}"><strong>#{{ $ticket->id }} <i class="fa fa-eye text-black"> </i> More Detail</a>
-        </div>
-
-
-
-    </summary>
-
-    <div class="folder">
-        <div class="inlineblock float-left">
-
-
+        <li><span class=" text-primary"> Description</span>
+        <div class="float-right">
             @if ($ticket->status =='open')
             <span class="badge badge-primary">{{ $ticket->status }}</span>
 
@@ -54,23 +28,22 @@
             <span class="badge badge-danger">{{ $ticket->priority }}</span>
 
             @endif
-
         </div>
-        <div class='clearfix'></div>
-        <p  class="p-0.5 text-black m-2">{{ $ticket->description }}</p>
+
+        <p style="background-color: #ffffff;" class='ml-5 mt-2 p-2'>{{ $ticket->description }}</p></li>
+
+        @forelse ( $ticket->children as $child)
+            <x-ticket :ticket='$child' ></x-ticket>
+        @empty
+                <li><i class="fa fa-comments"></i></li>
+            <div class="body ml-5 mb-5">
 
 
-            <div class="folder">
-                @forelse ( $ticket->children as $child)
-                    <x-ticket :ticket='$child' ></x-ticket>
-                @empty
-                    <div class="body">
-                        <ul class="comment-reply list-unstyled">
-                            @comments(['model' => $ticket])
-                        </ul>
-                    </div>
-                @endforelse
+                    @comments(['model' => $ticket])
+
             </div>
+        @endforelse
+    </ul>
 
-    </div>
-</details> --}}
+</li>
+

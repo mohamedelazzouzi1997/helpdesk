@@ -1,73 +1,83 @@
-@charset "UTF-8";
-body {
-    background: #222;
-    color: #aaa;
+.tree {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-.container {
+.tree ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-left: 1em;
     position: relative;
+}
+
+.tree ul ul {
+    margin-left: 0.5em;
+}
+
+.tree ul:before {
+    content: "";
     display: block;
-    width: 600px;
+    width: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    border-left: 1px solid;
 }
 
-details {
-    position: relative;
-    width: auto;
+.tree ul li:before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 0;
+    border-top: 1px solid;
+    margin-top: -1px;
+    position: absolute;
+    top: 1em;
+    left: 0;
+}
+
+.tree ul li:last-child:before {
     height: auto;
-    overflow: hidden;
-    max-height: 2.5em !important;
-    transition: all 0.1s ease;
+    top: 1em;
+    bottom: 0;
 }
 
-details ::-webkit-details-marker {
+.tree ul li p:last-child:before {
+    content: '';
+    height: auto;
+    top: 1em;
+    bottom: 0;
+}
+
+.tree ul li a:last-child:before {}
+
+.tree ul li a:last-child {}
+
+.tree li {
+    margin: 0;
+    padding: 0 1em;
+    line-height: 2em;
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    position: relative;
+}
+
+.tree li .expand {
+    display: block;
+}
+
+.tree li .collapse {
     display: none;
 }
 
-details>summary {
-    position: relative;
-    margin-top: 0.25em;
-    color: rgb(0, 0, 0);
-    padding: 0.1em 0.5em 0.2em;
-    background: #f5f5f5;
-    width: 100%;
+.tree li a {
+    text-decoration: none;
+    color: rgb(223, 164, 0);
 }
 
-details>summary:before {
-    font-size: 20;
-    content: "\27A4";
-    color: rgb(0, 0, 0);
-    margin-right: 0.5em;
-}
-
-details[open]>summary {
-    background: rgb(0, 0, 0);
-    color: #eee;
-    padding: -30px;
-}
-
-details[open]>summary:before {
-    font-size: 20;
-    content: "\2925";
-    color: #ccc;
-}
-
-.folder {
-    margin: 0 0 0.5em 0.86em;
-    padding: 0.5em 0em 0.5em 1.5em;
-    border-left: 0.1em rgb(29, 12, 12) dotted;
-    border-bottom: 0.1em rgb(8, 3, 3) dotted;
-}
-
-.folder p {
-    margin: 0;
-}
-
-details[open] {
-    height: auto;
-    max-height: 99em !important;
-    transition: all 1.2s ease;
-}
-
-details:not([open]) .folder {
-    height: 0px !important;
+.indicator {
+    margin-right: 5px;
 }

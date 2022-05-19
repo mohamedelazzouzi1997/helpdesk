@@ -14,10 +14,10 @@
                 <button data-toggle="modal" data-target="#reply-modal-{{ $comment->getKey() }}" class="btn btn-sm btn-muted text-uppercase">@lang('comments::comments.reply')</button>
             @endcan
             @can('edit-comment', $comment)
-                <button data-toggle="modal" data-target="#comment-modal-{{ $comment->getKey() }}" class="float-right btn btn-sm btn-warning  text-uppercase">@lang('comments::comments.edit')</button>
+                <button data-toggle="modal" data-target="#comment-modal-{{ $comment->getKey() }}" class="float-right btn btn-sm btn-warning text-uppercase">@lang('comments::comments.edit')</button>
             @endcan
             @can('delete-comment', $comment)
-                <a  href="{{ route('comments.destroy', $comment->getKey()) }}" onclick="event.preventDefault();document.getElementById('comment-delete-form-{{ $comment->getKey() }}').submit();" class="float-right btn btn-sm btn-danger  text-uppercase">@lang('comments::comments.delete')</a>
+                <a  href="{{ route('comments.destroy', $comment->getKey()) }}" onclick="event.preventDefault();document.getElementById('comment-delete-form-{{ $comment->getKey() }}').submit();" class="float-right btn btn-sm btn-danger text-white text-uppercase">@lang('comments::comments.delete')</a>
                 <form id="comment-delete-form-{{ $comment->getKey() }}" action="{{ route('comments.destroy', $comment->getKey()) }}" method="POST" style="display: none;">
                     @method('DELETE')
                     @csrf

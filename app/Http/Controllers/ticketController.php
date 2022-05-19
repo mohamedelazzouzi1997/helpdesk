@@ -15,24 +15,7 @@ class ticketController extends Controller
 
     public function index(Request $request){
 
-        // (string) $value = $request->search;
-
-        // if($request->has('search')){
-        //     $tickets = Ticket::where('status','LIKE', '%'.$value.'%')
-        //                         ->orwhere('id',$value)
-        //                         ->orwhere('title','LIKE', '%'.$value.'%')
-        //                         ->orwhere('priority','LIKE', '%'.$value.'%')
-        //                         ->orwhere('created_by','LIKE', '%'.$value.'%')
-        //                         // ->join('users', 'users.id', '=', 'tickets.user_id')->where('users.name','like','%'.$value.'%')
-        //                         ->paginate(5);
-
-
-        // }else{
-        //     $tickets = Ticket::latest()->paginate(5);
-        // }
-        $tickets = Ticket::tree()->get()->toTree();
-
-
+        $tickets = Ticket::tree()->latest()->get()->toTree();
 
 
         $total_tickets = Ticket::all();
