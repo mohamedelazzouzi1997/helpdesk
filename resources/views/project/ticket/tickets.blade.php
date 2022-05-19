@@ -2,7 +2,15 @@
 @section('title', 'Taskboard')
 @section('parentPageTitle', 'ticket')
 @section('page-style')
-<link rel="stylesheet" href="{{asset('assets/css/treeview.css')}}"/>
+{{-- <link rel="stylesheet" href="{{ asset('assets/css/treeview.css') }}" /> --}}
+<link rel="stylesheet" href="{{ asset('dist/themes/default/style.min.css') }}" />
+<style>
+            .demo {
+            overflow: auto;
+            border: 1px solid silver;
+            min-height: 100px;
+        }
+</style>
 @stop
 @section('content')
 <div class="row clearfix">
@@ -64,13 +72,13 @@
 </div>
 <div class="row clearfix">
     <div class="col-md-12 col-sm-12 col-xs-12">
-
         <div class="card ticket_list">
-            <div class="table-responsive">
+            <div id="html" class="table-responsive">
                     <ul>
                         @foreach ($tickets as $ticket )
                             <x-ticket :ticket='$ticket' ></x-ticket>
-                            <hr>
+                            <hr color="black">
+
                         @endforeach
                     </ul>
             </div>
@@ -80,9 +88,40 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="{{ asset('dist/jstree.min.js') }}"></script>
+<script>
+	// html demo
+	$('#html').jstree();
+
+	// // interaction and events
+	// $('#evts_button').on("click", function () {
+	// 	var instance = $('#evts').jstree(true);
+	// 	instance.deselect_all();
+	// 	instance.select_node('1');
+	// });
+	// $('#evts')
+	// 	.on("changed.jstree", function (e, data) {
+	// 		if(data.selected.length) {
+	// 			alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
+	// 		}
+	// 	})
+	// 	.jstree({
+	// 		'core' : {
+	// 			'multiple' : false,
+	// 			'data' : [
+	// 				{ "text" : "Root node", "children" : [
+	// 						{ "text" : "Child node 1", "id" : 1 },
+	// 						{ "text" : "Child node 2" }
+	// 				]}
+	// 			]
+	// 		}
+	// 	});
+</script>
 @stop
+
 @section('page-script')
 <script src="{{asset('assets/bundles/sparkline.bundle.js')}}"></script>
 <script src="{{asset('assets/js/pages/charts/sparkline.js')}}"></script>
-<script src="{{asset('assets/js/treeview.js')}}"></script>
+
 @stop
