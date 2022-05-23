@@ -17,7 +17,8 @@ class ticketController extends Controller
 
     public function index(Request $request){
 
-        $tickets = Ticket::tree()->latest()->get()->toTree();
+        // $tickets = Ticket::tree()->latest()->get()->toTree();
+        $tickets = Ticket::whereNull('parent_id')->with('children')->latest()->paginate(5);
 
 
         $total_tickets = Ticket::all();

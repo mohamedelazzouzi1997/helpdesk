@@ -9,13 +9,12 @@ use Laravelista\Comments\Commentable;
 use Illuminate\Database\Eloquent\Model;
 use Abdrzakoxa\EloquentFilter\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Staudenmeir\LaravelAdjacencyList\Eloquent\HasRecursiveRelationships;
 
 
 
 class Ticket extends Model
 {
-    use HasFactory,Commentable,HasRecursiveRelationships;
+    use HasFactory,Commentable;
 
       protected $fillable = [
         'title',
@@ -33,6 +32,11 @@ class Ticket extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function children(){
+
+        return $this->hasMany(Ticket::class,'parent_id')->with('children');
     }
 
 }

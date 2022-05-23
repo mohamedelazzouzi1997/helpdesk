@@ -17,7 +17,7 @@
                         </span>
                     @enderror
                     <input name='email' value='@if (Cookie::has('cookie_email'))
-                        {{ Cookie::get('cookie_email') }}
+                        {{ Cookie::get('cookie_email') }}'
 
                     @endif' type="email" class="form-control" placeholder="Email">
                     <div class="input-group-append">

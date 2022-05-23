@@ -1,5 +1,5 @@
 $(".close").click(function() {
     $(this)
         .parent(".alert")
-        .fadeOut(1000);
+        .fadeOut(600);
 });

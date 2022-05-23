@@ -75,7 +75,7 @@
                                     <input type="file" name='image' class="dropify" accept="image/png, image/jpeg">
                                 </div>
                             </div>
-                            <button class="btn btn-raised btn-primary waves-effect" type="submit">Create</button>
+                            <button class="btn btn-primary waves-effect waves-black" type="submit">Create</button>
                         </form>
                     </div>
                 </div>

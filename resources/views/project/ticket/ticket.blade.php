@@ -8,11 +8,15 @@
 @stop
 @section('content')
 @if (session()->has('success'))
-<div class="alert success-alert">
-     <h3>{{ session()->get('success') }}</h3>
-     <a class="close">&times;</a>
- </div>
+    <div data-notify="container" class="bootstrap-notify-container alert alert-dismissible alert-success animated fadeInDown" role="alert" data-notify-position="bottom-left" style="padding-top: 25px; display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 1031; bottom: 20px; left: 20px;">
+        <button type="button" aria-hidden="true" class="close" data-notify="dismiss" style="padding-top: 22px; position: absolute; right: 10px; top: 5px; z-index: 1033;">×</button>
+        <span data-notify="icon"></span>
+        <span data-notify="title"></span>
+        <span data-notify="message">{{ session()->get('success') }}</span>
+        <a class='close' href="#" target="_blank" data-notify="url"></a>
+    </div>
 @endif
+
 <div class="row clearfix">
     <div class="col-lg-4 col-md-12">
         <div class="card mcard_4">
@@ -79,22 +83,15 @@
                             @else
                                 <span class="badge badge-danger">{{ $ticket->status }}</span>
                             @endif
+                            @if($ticket->status !='resolve')
                             <a href="{{ route('resolve.ticket',$ticket->id) }}" class="btn btn-success float-right"><i class="fa fa-check"></i></a>
+                            @endif
                     </li>
                 </ul>
-
-
-                {{-- <small class="text-muted">Team: </small>
-                <ul class="list-unstyled team-info margin-0">
-                    <li><img src="{{asset('assets/images/xs/avatar7.jpg')}}" alt="Avatar"></li>
-                    <li><img src="{{asset('assets/images/xs/avatar8.jpg')}}" alt="Avatar"></li>
-                    <li><img src="{{asset('assets/images/xs/avatar9.jpg')}}" alt="Avatar"></li>
-                    <li><img src="{{asset('assets/images/xs/avatar2.jpg')}}" alt="Avatar"></li>
-                    <li><img src="{{asset('assets/images/xs/avatar3.jpg')}}" alt="Avatar"></li>
-                </ul> --}}
             </div>
         </div>
     </div>
+
     <div class="col-lg-8 col-md-12">
         <div class="card">
             <div class="body">
@@ -135,8 +132,11 @@
     </div>
     </div>
 </div>
+
 @stop
 @section('page-script')
+<script src="{{asset('assets/plugins/bootstrap-notify/bootstrap-notify.js')}}"></script>
+<script src="{{asset('assets/js/pages/ui/notifications.js')}}"></script>
 <script src="{{asset('assets/bundles/c3.bundle.js')}}"></script>
 <script src="{{asset('assets/plugins/summernote/dist/summernote.js')}}"></script>
 <script src="{{asset('assets/js/pages/ticket-page.js')}}"></script>

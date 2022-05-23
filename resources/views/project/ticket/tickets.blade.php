@@ -74,9 +74,9 @@
                     {{-- <hr color='black' style="margin-left: 35px;margin-right: 30px;"> --}}
                 @endforeach
             </ul>
-            {{-- <div class="mt-3 d-flex justify-content-center">
+            <div class="mt-3 d-flex justify-content-center">
                 {{$tickets->links()}}
-            </div> --}}
+            </div>
         </div>
     </div>
 </div>
