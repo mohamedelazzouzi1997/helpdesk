@@ -26,7 +26,7 @@
                 <div class="row clearfix">
                     <div class="col-sm-12">
 
-                        <form action='{{ route('store.ticket') }}' id="form_validation" method="POST">
+                        <form action='{{ route('store.ticket') }}' id="form_validation" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class='mb-1 font-weight-bolder font-20' for="image">Title</div>
                             <div class="form-group form-float">
@@ -72,7 +72,7 @@
                             <div style="margin-left: -15px;" class="col-lg-12 col-md-12">
                                 <div class="card">
                                     <label class="font-weight-bolder font-20" for="image">Image</label>
-                                    <input type="file" name='image' class="dropify">
+                                    <input type="file" name='image' class="dropify" accept="image/png, image/jpeg">
                                 </div>
                             </div>
                             <button class="btn btn-raised btn-primary waves-effect" type="submit">Create</button>

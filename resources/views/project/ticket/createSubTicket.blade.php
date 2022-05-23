@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title', 'Create Ticket')
+@section('title', 'Create Sub Ticket')
 @section('parentPageTitle', 'Ticket')
 @section('page-style')
 <link rel="stylesheet" href="{{asset('assets/plugins/dropify/css/dropify.min.css')}}"/>
@@ -22,7 +22,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="card">
             <div class="body">
-                <h6 class="card-inside-title text-primary">Add ticket</h6>
+                <h6 class="card-inside-title text-primary">Add Sub ticket</h6>
                 <div class="row clearfix">
                     <div class="col-sm-12">
 
@@ -60,12 +60,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div style="margin-left: -13px;" class="col-lg-3 col-md-6 form-group inlineblock ">
-                                <label class="font-weight-bolder font-20"> <b>Parent ticket</b> </label>
-                                <select name='parent_id' class="form-control show-tick ms search-select" data-placeholder="Select">
-                                    <option value='{{ $parent_id }}'>{{ $parent_id}}</option>
-                                </select>
-                            </div>
+                                <input class="form-control" type="hidden" value='{{ $parent_id }}' name="parent_id">
                             <div class="col-lg-4 col-md-6 inlineblock">
                                 <label class="font-weight-bolder font-20">Date Time</label>
                                 <div class="input-group masked-input mb-3">

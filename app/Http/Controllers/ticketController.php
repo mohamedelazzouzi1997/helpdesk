@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Ticket;
 use App\Models\Project;
+use App\Mail\ticketMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ticketController extends Controller
 {
@@ -63,6 +65,7 @@ class ticketController extends Controller
         $user_ticket_close = Ticket::where('user_id',$user_id)->where('status', 'close')->get();
         $user_ticket_open = Ticket::where('user_id',$user_id)->where('status', 'open')->get();
         $user_ticket_in_progress = Ticket::where('user_id',$user_id)->where('status', 'in progress')->get();
+        $user_ticket_resolve = Ticket::where('user_id',$user_id)->where('status', 'resolve')->get();
 
         return view('project.ticket.ticket')->with([
             'ticket' => $ticket,
@@ -70,6 +73,7 @@ class ticketController extends Controller
             'user_ticket_close' => $user_ticket_close,
             'user_ticket_open' => $user_ticket_open,
             'user_ticket_in_progress' => $user_ticket_in_progress,
+            'user_ticket_resolve' => $user_ticket_resolve,
         ]);
     }
 
@@ -83,45 +87,68 @@ class ticketController extends Controller
             'end_time' => 'required',
         ]);
 
+        if($request->has('image')){
+            $file = $request->image;
+            $extention = $file->getClientOriginalName();
+            $filename = time().'_'. $extention;
+            $file->move(public_path('upload/tickets/'),$filename);
+        }else{
+            $filename = $request->image;
+        }
+
         $ticket = Ticket::create([
             'title' => $request->title,
             'priority' => $request->priority,
             'description' => $request->description,
-            'image' => $request->image,
+            'image' => $filename,
             'created_by' => Auth::user()->name,
             'user_id'=> $request->user_id,
             'end_time' => $request->end_time,
             'parent_id' => $request->parent_id
         ]);
-        return redirect()->route('show.ticket',$ticket->id)->with([
-            'success' => 'ticket created successfully'
-        ]);
 
+        if($ticket){
+            $user_mail = User::where('id', $request->user_id)->first();
+
+            Mail::to($user_mail->email)->send(new ticketMail($user_mail,$ticket, Auth::user()));
+
+            return redirect()->route('show.ticket',$ticket->id)->with([
+            'success' => 'ticket created successfully'
+            ]);
+        }else{
+             return redirect()->route('create.ticket')->with([
+            'fail' => 'ticket created faild'
+            ]);
+        }
     }
 
-      public function update(Request $request,$id){
+    public function update(Request $request,$id){
 
-
-            $validated = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'user_id' => 'required',
-            'end_time' => 'required',
-        ]);
+        $validated = $request->validate([
+                    'title' => 'required',
+                    'description' => 'required',
+                    'user_id' => 'required',
+                    'end_time' => 'required',
+                  ]);
 
         $ticket = Ticket::find($id);
-        if($request->has('image')){
-                $image = $request->image;
+
+          if($request->has('image')){
+            $file = $request->image;
+            $extention = $file->getClientOriginalName();
+            $filename = time().'_'. $extention;
+            $file->move(public_path('upload/tickets/'),$filename);
+            }else{
+                $filename = $ticket->image;
             }
-        else{
-                $image = $ticket->image;
-        }
+
+
         $ticket->update([
             'title' => $request->title,
             'priority' => $request->priority,
             'description' => $request->description,
             'status' => $request->status,
-            'image' => $image,
+            'image' => $filename,
             'end_time' => $request->end_time,
             'user_id' => $request->user_id
         ]);
@@ -161,7 +188,7 @@ class ticketController extends Controller
         ]);
 
         return redirect()->route('show.ticket',$ticket->id)->with([
-            'success' => 'ticket updated successfully'
+            'success' => 'ticket resolved successfully'
         ]);
 
     }

@@ -68,9 +68,10 @@
         <div class="card ticket_list">
             <ul id="tree1" class="tree">
                 @foreach ($tickets as $ticket )
-
-                    <x-ticket :ticket='$ticket' ></x-ticket>
-                    <hr color='black' style="margin-left: 45px;margin-right: 30px;">
+                    <div  class='first py-2 rounded mb-2'>
+                      <x-ticket :ticket='$ticket' ></x-ticket>
+                    </div>
+                    {{-- <hr color='black' style="margin-left: 35px;margin-right: 30px;"> --}}
                 @endforeach
             </ul>
             {{-- <div class="mt-3 d-flex justify-content-center">

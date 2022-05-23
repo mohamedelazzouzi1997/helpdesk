@@ -4,8 +4,15 @@
 @section('page-style')
 <link rel="stylesheet" href="{{asset('assets/plugins/charts-c3/plugin.css')}}"/>
 <link rel="stylesheet" href="{{asset('assets/plugins/summernote/dist/summernote.css')}}"/>
+<link rel="stylesheet" href="{{asset('assets/css/alert.css')}}"/>
 @stop
 @section('content')
+@if (session()->has('success'))
+<div class="alert success-alert">
+     <h3>{{ session()->get('success') }}</h3>
+     <a class="close">&times;</a>
+ </div>
+@endif
 <div class="row clearfix">
     <div class="col-lg-4 col-md-12">
         <div class="card mcard_4">
@@ -28,10 +35,10 @@
                     <h5 class="mt-3 mb-1">{{ $ticket->user->name }}</h5>
                     <small class="text-muted">{{ $ticket->user->email }}</small>
                     <ul class="list-unstyled mt-3 mr-lg-3  d-flex">
-                        <li class="mr-3"><strong class='badge badge-primary'>Total:-</strong> {{ $user_ticket_count->count() }}</li>
-                        <li class="mr-3"><strong class='badge badge-danger'>Open:-</strong> {{ $user_ticket_open->count() }}</li>
-                        <li class="mr-3"><strong class='badge badge-success'>Closed:-</strong> {{ $user_ticket_close->count() }}</li>
-
+                        <li class="mr-3"><strong class='badge badge-primary'>Open:-</strong> {{ $user_ticket_open->count() }}</li>
+                        <li class="mr-3"><strong class='badge badge-warning'>In progress:-</strong> {{ $user_ticket_in_progress->count() }}</li>
+                        <li class="mr-3"><strong class='badge badge-success'>resolved:-</strong> {{ $user_ticket_resolve->count() }}</li>
+                        <li class="mr-3"><strong class='badge badge-danger'>Closed:-</strong> {{ $user_ticket_close->count() }}</li>
                     </ul>
                 </div>
             </div>
@@ -72,8 +79,10 @@
                             @else
                                 <span class="badge badge-danger">{{ $ticket->status }}</span>
                             @endif
+                            <a href="{{ route('resolve.ticket',$ticket->id) }}" class="btn btn-success float-right"><i class="fa fa-check"></i></a>
                     </li>
                 </ul>
+
 
                 {{-- <small class="text-muted">Team: </small>
                 <ul class="list-unstyled team-info margin-0">
@@ -95,7 +104,7 @@
         </div>
         <div class="card">
             <div style="padding-left: 18px;" class="header">
-                <h2><strong>Ticket</strong> Replies</h2>
+                <h2><strong>Ticket</strong> Comments</h2>
             </div>
             <div class="body">
                 <ul class="comment-reply list-unstyled">
@@ -103,6 +112,27 @@
                 </ul>
             </div>
         </div>
+        @if ($ticket->image != NULL)
+
+            <div class="card">
+
+                <div class="body">
+                     <h5><span style='color:#e88797'>Ticket</span> issue</h5>
+                <!-- Modal -->
+                    <a width='100%' class="btn btn-link" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img width='100%' height="100%" id="myImg" src="{{ asset('/upload/tickets/'.$ticket->image) }}" alt="Snow">
+                    </a>
+                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <img width='100%' height="70%" id="myImg" src="{{ asset('/upload/tickets/'.$ticket->image) }}" alt="Snow" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div>
     </div>
 </div>
 @stop
@@ -110,4 +140,5 @@
 <script src="{{asset('assets/bundles/c3.bundle.js')}}"></script>
 <script src="{{asset('assets/plugins/summernote/dist/summernote.js')}}"></script>
 <script src="{{asset('assets/js/pages/ticket-page.js')}}"></script>
+<script src="{{asset('assets/js/alert.js')}}"></script>
 @stop
