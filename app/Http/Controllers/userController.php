@@ -6,10 +6,24 @@ use App\Models\User;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 class userController extends Controller
 {
     //
+    public function __construct() {
+
+        $this->middleware(function ($request, $next) {
+
+            $tasks = Ticket::where('user_id',  Auth::user()->id)
+                            ->where('status','in progress')
+                            ->orWhere('status','open')
+                            ->get();
+            View::share ('tasks', $tasks);
+            return $next($request);
+        });
+
+    }
 
     public function index(){
 

@@ -9,13 +9,30 @@ use App\Mail\ticketMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\View;
 
 class ticketController extends Controller
 {
     //
 
 
-    public function index(Request $request){
+    public function __construct() {
+
+        $this->middleware(function ($request, $next) {
+
+            $tasks = Ticket::where('user_id',  Auth::user()->id)
+                            ->where('status','in progress')
+                            ->orWhere('status','open')
+                            ->get();
+            View::share ('tasks', $tasks);
+            return $next($request);
+        });
+
+    }
+
+
+
+    public function index(){
 
         // $tickets = Ticket::tree()->latest()->get()->toTree();
         $tickets = Ticket::whereNull('parent_id')->with('children')->latest()->paginate(5);
