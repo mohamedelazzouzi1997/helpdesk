@@ -1,7 +1,7 @@
 <?php
     $tasks = App\Models\Ticket::where('user_id',  Auth::user()->id)
                     ->whereIn('status',['open','in progress'])
-                    ->take(10)->get();
+                    ->latest()->take(10)->get();
     $user = App\Models\User::find(Auth::user()->id);
 
 ?>
@@ -63,30 +63,30 @@
             <ul class="dropdown-menu slideUp2">
                 <li class="header">Notifications</li>
                 @forelse( $user->unreadNotifications as $notification )
-                <li class="ml-3" style="border-bottom: .5px solid #eee; margin-bottom:0px">
-                    <a style="padding-bottom: 0px" href="{{ route('show.ticket',$notification->data['ticket']['id']) }}">
-                            <div style="width: 100%;" class="progress-container progress-primary">
+                <li class='pt-0' id='li-notify' style="border-bottom: .5px solid #eee; margin-bottom:0px">
+                        <ul>
+                            <li>
+                                <small class="mr-2 float-right">
+                                    <small>
+                                        <a href="#" class="mark-as-read" data-id="{{ $notification->id }}">mark as <i class="fa fa-eye text-warning"></i></a>
+                                    </small>
+                                </small>
+                            </li>
+                        </ul>
+                    <a style="padding-top: 0;padding-bottom: 0;"  href="{{ route('show.ticket',$notification->data['ticket']['id']) }}">
+                        <div style="width: 100%;" class="progress-container progress-primary">
+                            <strong class="text-danger text-truncate">{{ $notification->data['ticket']['title'] }}</strong>
+                            <div style='width:100%' class="text-black">
+                                <small class="text-black">
+                                    <small class="text-blue">
+                                        {{ $notification->created_at->diffForHumans() }}
 
-                                <span ><small class="text-danger text-truncate">{{ $notification->data['ticket']['title'] }}</small>
-
-                                </span>
-
-                                <ul class="list-unstyled team-info">
-                                    <li style=" margin-bottom:0px" class="m-r-15">
-                                        <small class="text-black">
-                                            <small class="text-blue">
-                                                {{ $notification->created_at->diffForHumans() }}
-                                                <small class="ml-lg-5 float-right">
-                                                    <a href="#" class="mark-as-read" data-id="{{ $notification->id }}">mark as read</a>
-                                                </small>
-                                            </small>
-                                        </small>
-
-                                    </li>
-                                </ul>
+                                    </small>
+                                </small>
                             </div>
-                        </a>
-                    </li>
+                        </div>
+                    </a>
+                </li>
 
                 @empty
                   <li class="body ml-2 mt-2">There are no new notifications</li>

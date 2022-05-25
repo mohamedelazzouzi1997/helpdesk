@@ -117,14 +117,14 @@
                         }else{
                             $('#notifCount').text(count - 1);
                         }
-                        $(this).parents('li.ml-3').remove();
+                        $(this).parents('li.pt-0').remove();
                     });
                 });
                 $('#mark-all').click(function() {
                     let request = sendMarkRequest();
                     request.done(() => {
                         $('#notifCount').remove();
-                        $('li.ml-3').remove();
+                        $('li.pt-0').remove();
                     })
                 });
             });
