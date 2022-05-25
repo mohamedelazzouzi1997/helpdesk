@@ -75,7 +75,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
                             <div class="col-lg-4 col-md-6 inlineblock">
                                 <label class="font-weight-bolder font-20">Date Time</label>
                                 @error('end_time')
