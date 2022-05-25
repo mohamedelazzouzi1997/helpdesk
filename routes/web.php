@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/', function () {return view('layout.app');})->name('dashboard');
+    Route::get('/', function () {return redirect()->route('tickets');})->name('dashboard');
     Route::get('/user/profile', 'userController@index')->name('profile');
 
 
@@ -36,13 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/delete/ticket/{id}', 'ticketController@delete')->name('delete.ticket');
     //tickets route
 
-    // //project routes
-    // Route::get('/projects', 'projectController@index')->name('projects');
-    // Route::get('/create/project', 'projectController@create')->name('create.project');
-    // Route::post('/projects', 'projectController@store')->name('store.project');
-    // Route::get('/project/{id}', 'projectController@show')->name('show.project');
-    // //project route
-
+    //profile routes
     Route::put('/profile/{id}', 'userController@update')->name('update.profile');
 
+    //notification routes
+    Route::post('/mark-as-read', 'notificationController@markNotification')->name('markNotification');
 });

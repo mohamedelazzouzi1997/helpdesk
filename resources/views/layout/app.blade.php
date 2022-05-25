@@ -88,6 +88,7 @@
         <!-- Scripts -->
         @stack('before-scripts')
         <!-- JavaScript Bundle with Popper -->
+
         <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
 
@@ -96,7 +97,36 @@
         @if (trim($__env->yieldContent('page-script')))
             @yield('page-script')
 		@endif
+        <script>
+            const span = document.querySelector('span');
+            const data_count = span.getAttribute('data-count');
 
-
+            function sendMarkRequest(id = null) {
+                return $.ajax("{{ route('markNotification') }}", {
+                    method: 'POST',
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'id': id
+                    }
+                });
+            }
+            $(function() {
+                $('.mark-as-read').click(function() {
+                    let request = sendMarkRequest($(this).data('id'));
+                    request.done(() => {
+                        // let value = $('#notifCount').val(attr('data-count'));
+                        $('#notifCount').text();
+                        $(this).parents('li.ml-3').remove();
+                    });
+                });
+                $('#mark-all').click(function() {
+                    let request = sendMarkRequest();
+                    request.done(() => {
+                        $('#notifCount').remove();
+                        $('li.ml-3').remove();
+                    })
+                });
+            });
+        </script>
     </body>
 </html>

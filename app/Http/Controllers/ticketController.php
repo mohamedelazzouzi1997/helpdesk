@@ -10,31 +10,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
+use App\Notifications\TicketNotification;
 
 class ticketController extends Controller
 {
     //
 
 
-    public function __construct() {
-
-        $this->middleware(function ($request, $next) {
-
-            $tasks = Ticket::where('user_id',  Auth::user()->id)
-                            ->where('status','in progress')
-                            ->orWhere('status','open')
-                            ->get();
-            View::share ('tasks', $tasks);
-            return $next($request);
-        });
-
-    }
-
-
-
     public function index(){
 
-        // $tickets = Ticket::tree()->latest()->get()->toTree();
         $tickets = Ticket::whereNull('parent_id')->with('children')->latest()->paginate(5);
 
 
@@ -99,7 +83,7 @@ class ticketController extends Controller
 
 
         $validated = $request->validate([
-            'title' => 'required',
+            'title' => 'required|max:255',
             'description' => 'required',
             'user_id' => 'required',
             'end_time' => 'required',
@@ -126,9 +110,12 @@ class ticketController extends Controller
         ]);
 
         if($ticket){
-            $user_mail = User::where('id', $request->user_id)->first();
+            $user = User::where('id', $request->user_id)->first();
 
-            Mail::to($user_mail->email)->send(new ticketMail($user_mail,$ticket, Auth::user()));
+
+            Mail::to($user->email)->send(new ticketMail($user,$ticket, Auth::user()));
+
+            $user->notify(new TicketNotification($ticket));
 
             return redirect()->route('show.ticket',$ticket->id)->with([
             'success' => 'ticket created successfully'
@@ -143,25 +130,25 @@ class ticketController extends Controller
     public function update(Request $request,$id){
 
         $validated = $request->validate([
-                    'title' => 'required',
-                    'description' => 'required',
-                    'user_id' => 'required',
-                    'end_time' => 'required',
-                  ]);
+            'title' => 'required|max:255',
+            'description' => 'required',
+            'user_id' => 'required',
+            'end_time' => 'required',
+        ]);
 
         $ticket = Ticket::find($id);
 
-          if($request->has('image')){
+        if($request->has('image')){
             $file = $request->image;
             $extention = $file->getClientOriginalName();
             $filename = time().'_'. $extention;
             $file->move(public_path('upload/tickets/'),$filename);
-            }else{
-                $filename = $ticket->image;
-            }
+        }else{
+            $filename = $ticket->image;
+        }
 
 
-        $ticket->update([
+        $updated = $ticket->update([
             'title' => $request->title,
             'priority' => $request->priority,
             'description' => $request->description,
@@ -170,12 +157,17 @@ class ticketController extends Controller
             'end_time' => $request->end_time,
             'user_id' => $request->user_id
         ]);
-
-        return redirect()->route('show.ticket',$ticket->id)->with([
-            'success' => 'ticket updated successfully'
-        ]);
-
+        if($updated){
+            return redirect()->route('show.ticket',$ticket->id)->with([
+                        'success' => 'ticket updated successfully'
+                    ]);
+        }else{
+            return redirect()->route('show.ticket',$ticket->id)->with([
+                        'success' => 'ticket not updated'
+                    ]);
+}
     }
+
 
     public function edit($id){
 
@@ -188,10 +180,11 @@ class ticketController extends Controller
         ]);
     }
 
-    public function delete($id){
-          $ticket = Ticket::find($id);
 
-          $ticket->delete();
+    public function delete($id){
+        $ticket = Ticket::find($id);
+
+        $ticket->delete();
         return redirect()->route('tickets')->with([
             'success' => 'ticket deleted successfully'
         ]);
@@ -201,13 +194,19 @@ class ticketController extends Controller
 
         $ticket = Ticket::find($id);
 
-        $ticket->update([
+        $updated = $ticket->update([
             'status' => 'resolve',
         ]);
 
-        return redirect()->route('show.ticket',$ticket->id)->with([
-            'success' => 'ticket resolved successfully'
-        ]);
+        if($updated){
+            return redirect()->route('show.ticket',$ticket->id)->with([
+                'success' => 'ticket resolved successfully'
+            ]);
+        }else{
+            return redirect()->route('show.ticket',$ticket->id)->with([
+                'success' => 'ticket resolved faild'
+            ]);
+        }
 
     }
 }
