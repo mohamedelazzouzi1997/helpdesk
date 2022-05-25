@@ -1,7 +1,7 @@
 <?php
     $tasks = App\Models\Ticket::where('user_id',  Auth::user()->id)
                     ->whereIn('status',['open','in progress'])
-                    ->get();
+                    ->take(10)->get();
     $user = App\Models\User::find(Auth::user()->id);
 
 

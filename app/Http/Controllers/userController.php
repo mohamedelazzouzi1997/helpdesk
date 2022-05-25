@@ -35,8 +35,6 @@ class userController extends Controller
 
         $user =  User::find($id);
 
-
-
         if($request->has('image')){
             $file = $request->image;
             $extention = $file->getClientOriginalName();
