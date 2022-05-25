@@ -98,9 +98,6 @@
             @yield('page-script')
 		@endif
         <script>
-            const span = document.querySelector('span');
-            const data_count = span.getAttribute('data-count');
-
             function sendMarkRequest(id = null) {
                 return $.ajax("{{ route('markNotification') }}", {
                     method: 'POST',
@@ -112,10 +109,14 @@
             }
             $(function() {
                 $('.mark-as-read').click(function() {
+                    let count = document.getElementById("notifCount").textContent;
                     let request = sendMarkRequest($(this).data('id'));
                     request.done(() => {
-                        // let value = $('#notifCount').val(attr('data-count'));
-                        $('#notifCount').text();
+                        if( count - 1 == 0 ){
+                            $('#notifCount').remove();
+                        }else{
+                            $('#notifCount').text(count - 1);
+                        }
                         $(this).parents('li.ml-3').remove();
                     });
                 });
