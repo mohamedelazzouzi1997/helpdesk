@@ -91,14 +91,14 @@
                                 </div>
                             </div>
                             <div style="margin-left: -15px;" class="col-lg-12 col-md-12">
-                                <div class="card">
-                                    <label class="font-weight-bolder font-20" for="image">Image</label>
+                            <label class="font-weight-bolder font-20" for="image">Image</label>
                                 @error('image')
                                     <span style="display: block;" class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                    <input  type="file" name='image' class="dropify @error('image') is-invalid @enderror" accept="image/png, image/jpeg">
+                                <div class="card" @error('image') style='border: 1px solid red' @enderror>
+                                    <input  type="file" name='image' class="dropify" accept="image/png, image/jpeg">
                                 </div>
                             </div>
                             <button class="btn btn-primary waves-effect waves-black" type="submit">Create</button>
