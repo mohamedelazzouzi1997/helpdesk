@@ -31,7 +31,12 @@
                             @csrf
                             <div class="form-group form-float">
                                 <div class='mb-1 font-weight-bolder font-20' for="priority">Title</div>
-                                <input value="{{ $ticket->title }}" type="text" class="form-control" placeholder="title" name="title" required>
+                                @error('title')
+                                    <span style="display: block;" class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <input value="{{ $ticket->title }}" type="text" class="form-control @error('title') is-invalid @enderror" placeholder="title" name="title" required>
                             </div>
 
                             <div class="form-group">
@@ -84,11 +89,21 @@
                             </div>
                             <div class="form-group form-float">
                                 <div class='mb-1 font-weight-bolder font-20' for="priority">Description</div>
-                                <textarea name="description" cols="30" rows="5" placeholder="Description" class="form-control no-resize" required>{{ $ticket->description }}</textarea>
+                                @error('description')
+                                    <span style="display: block;" class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <textarea name="description" cols="30" rows="5" placeholder="Description" class="form-control no-resize @error('description') is-invalid @enderror" required>{{ $ticket->description }}</textarea>
                             </div>
                             <div style="margin-left: -13px;" class="col-lg-3 col-md-6 form-group inlineblock">
                                 <label class="font-weight-bolder font-20"> <b>Assign ticket to user</b> </label>
-                                <select name='user_id' required class="form-control show-tick ms search-select" data-placeholder="Select User">
+                                @error('user_id')
+                                    <span style="display: block;" class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <select name='user_id' class="form-control show-tick ms search-select @error('user_id') is-invalid @enderror" data-placeholder="Select User">
                                     <option></option>
                                     @foreach ($users as $user )
                                         <option @if ($ticket->user->id == $user->id) selected @endif
@@ -100,16 +115,26 @@
 
                             <div class="col-lg-4 col-md-6 inlineblock">
                                 <label class="font-weight-bolder font-20">Date Time</label>
+                                @error('end_time')
+                                    <span style="display: block;" class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                 <div class="input-group masked-input mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="zmdi zmdi-calendar-note"></i></span>
                                     </div>
-                                    <input value='{{ $ticket->end_time }}' name='end_time' type="text" class="form-control datetime" placeholder="Ex: 31/12/2022 23:59">
+                                    <input value='{{ $ticket->end_time }}' name='end_time' type="text" class="form-control datetime @error('end_time') is-invalid @enderror" placeholder="Ex: 31/12/2022 23:59">
                                 </div>
                             </div>
                             <div style="margin-left: -15px;" class="col-lg-12 col-md-12">
-                                <div class="card">
-                                    <div class='mb-1 font-weight-bolder font-20' for="priority">Image</div>
+                            <div class='mb-1 font-weight-bolder font-20' for="priority">Image</div>
+                                @error('image')
+                                    <span style="display: block;" class="invalid-feedback " role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <div class="card" @error('image') style='border: 1px solid red' @enderror>
                                     <input type="file" name='image' class="dropify">
                                 </div>
                             </div>

@@ -7,53 +7,6 @@
 ?>
 <div class="navbar-right">
     <ul class="navbar-nav">
-        <li><a href="#search" class="main_search" title="Search..."><i class="zmdi zmdi-search"></i></a></li>
-        <li class="dropdown">
-            <a href="javascript:void(0);" class="dropdown-toggle" title="App" data-toggle="dropdown" role="button"><i class="zmdi zmdi-apps"></i></a>
-            <ul class="dropdown-menu slideUp2">
-                <li class="header">App Sortcute</li>
-                <li class="body">
-                    <ul class="menu app_sortcut list-unstyled">
-                        <li>
-                            <a href="">
-                                <div class="icon-circle mb-2 bg-blue"><i class="zmdi zmdi-camera"></i></div>
-                                <p class="mb-0">Photos</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <div class="icon-circle mb-2 bg-amber"><i class="zmdi zmdi-translate"></i></div>
-                                <p class="mb-0">Translate</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <div class="icon-circle mb-2 bg-green"><i class="zmdi zmdi-calendar"></i></div>
-                                <p class="mb-0">Calendar</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div class="icon-circle mb-2 bg-purple"><i class="zmdi zmdi-account-calendar"></i></div>
-                                <p class="mb-0">Contacts</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <div class="icon-circle mb-2 bg-red"><i class="zmdi zmdi-tag"></i></div>
-                                <p class="mb-0">News</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);">
-                                <div class="icon-circle mb-2 bg-grey"><i class="zmdi zmdi-map"></i></div>
-                                <p class="mb-0">Maps</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
         <li class="dropdown">
             <a href="javascript:void(0);" class="dropdown-toggle" title="Notifications" data-toggle="dropdown" role="button"><i class="zmdi zmdi-notifications"></i>
                 <div class="notify"><span class="heartbit"></span><span class="point">@if ($user->unreadNotifications->count())
@@ -89,7 +42,7 @@
                 </li>
 
                 @empty
-                  <li class="body ml-2 mt-2">There are no new notifications</li>
+                  <li style='color:grey' class="body ml-5 mt-2">notifications are empty</li>
                 @endforelse
                 <li class="footer"><a href="#" id="mark-all"><small>Mark all as read</small></a> </li>
             </ul>
@@ -112,7 +65,7 @@
 
                                         <span ><small class="text-danger text-truncate">{{ $task->title }}</small>
                                         <div class="ml-lg-5 float-right">
-                                                @if ($task->status =='open')
+                                                {{-- @if ($task->status =='open')
                                                 <span class="badge badge-primary">{{ $task->status }}</span>
 
                                                 @elseif ($task->status =='in progress')
@@ -124,7 +77,7 @@
                                                 @else
                                                 <span class="badge badge-danger">{{ $task->status }}</span>
 
-                                                @endif
+                                                @endif --}}
                                                 @if ($task->priority =='low')
                                                 <span class="badge badge-primary">{{ $task->priority }}</span>
 
@@ -147,7 +100,7 @@
                             </li>
 
                         @empty
-                            <li><span class='ml-5 mt-5'>your are tasks empty</span></li>
+                            <li><span style='color:grey' class='ml-5 mt-5'>your are tasks empty</span></li>
                         @endforelse ( $tasks as $task)
                     </ul>
                 </li>

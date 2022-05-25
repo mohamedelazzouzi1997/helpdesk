@@ -29,8 +29,13 @@
                         <form action='{{ route('store.ticket') }}' id="form_validation" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class='mb-1 font-weight-bolder font-20' for="image">Title</div>
+                                @error('title')
+                                    <span style="display: block;" class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             <div class="form-group form-float">
-                                <input type="text" class="form-control" placeholder="title" name="title" required>
+                                <input value='{{ old('title') }}' type="text" class="form-control @error('title') is-invalid @enderror" placeholder="title" name="title" required>
                             </div>
 
                             <div class="form-group">
@@ -48,31 +53,52 @@
                                     <label for="high">high</label>
                                 </div>
                             </div>
+                                @error('description')
+                                    <span style="display: block;" class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             <div class="form-group form-float">
-                                <textarea name="description" cols="30" rows="5" placeholder="Description" class="form-control no-resize" required></textarea>
+                                <textarea name="description" cols="30" rows="5" placeholder="Description" class="form-control no-resize @error('description') is-invalid @enderror" required>{{ old('description') }}</textarea>
                             </div>
                             <div style="margin-left: -13px;" class="col-lg-3 col-md-6 form-group inlineblock">
                                 <label class="font-weight-bolder font-20"> <b>Assign ticket to user</b> </label>
-                                <select name='user_id' required class="form-control show-tick ms search-select" data-placeholder="Select User">
+                                @error('user_id')
+                                    <span style="display: block;" class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <select name='user_id' required class="form-control show-tick ms search-select  @error('user_id') is-invalid @enderror" data-placeholder="Select User">
                                     <option></option>
                                     @foreach ($users as $user )
                                         <option value='{{ $user->id }}'>{{ $user->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="col-lg-4 col-md-6 inlineblock">
                                 <label class="font-weight-bolder font-20">Date Time</label>
+                                @error('end_time')
+                                    <span style="display: block;" class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                 <div class="input-group masked-input mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="zmdi zmdi-calendar-note"></i></span>
                                     </div>
-                                    <input name='end_time' type="text" class="form-control datetime" placeholder="Ex: 31/12/2022 23:59">
+                                    <input value='{{ old('end_time')}}' name='end_time' type="text" class="form-control datetime  @error('end_time') is-invalid @enderror" placeholder="Ex: 31/12/2022 23:59">
                                 </div>
                             </div>
                             <div style="margin-left: -15px;" class="col-lg-12 col-md-12">
                                 <div class="card">
                                     <label class="font-weight-bolder font-20" for="image">Image</label>
-                                    <input type="file" name='image' class="dropify" accept="image/png, image/jpeg">
+                                @error('image')
+                                    <span style="display: block;" class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                    <input  type="file" name='image' class="dropify @error('image') is-invalid @enderror" accept="image/png, image/jpeg">
                                 </div>
                             </div>
                             <button class="btn btn-primary waves-effect waves-black" type="submit">Create</button>

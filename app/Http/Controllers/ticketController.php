@@ -83,10 +83,11 @@ class ticketController extends Controller
 
 
         $validated = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
+            'title' => 'required|max:20',
+            'description' => 'required|max:255',
             'user_id' => 'required',
             'end_time' => 'required',
+            'image' => 'max:2048'
         ]);
 
         if($request->has('image')){
@@ -130,10 +131,11 @@ class ticketController extends Controller
     public function update(Request $request,$id){
 
         $validated = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
+            'title' => 'required|max:20',
+            'description' => 'required|max:255',
             'user_id' => 'required',
             'end_time' => 'required',
+            'image' => 'max:2048'
         ]);
 
         $ticket = Ticket::find($id);
