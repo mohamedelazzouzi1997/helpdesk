@@ -4,7 +4,6 @@
                     ->take(10)->get();
     $user = App\Models\User::find(Auth::user()->id);
 
-
 ?>
 <div class="navbar-right">
     <ul class="navbar-nav">
@@ -76,7 +75,7 @@
                                     <li style=" margin-bottom:0px" class="m-r-15">
                                         <small class="text-black">
                                             <small class="text-blue">
-                                                {{ $notification->created_at }}
+                                                {{ $notification->created_at->diffForHumans() }}
                                                 <small class="ml-lg-5 float-right">
                                                     <a href="#" class="mark-as-read" data-id="{{ $notification->id }}">mark as read</a>
                                                 </small>

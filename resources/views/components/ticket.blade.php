@@ -4,35 +4,32 @@
     <small class="float-right text-blue">{{ date('d/m/Y h:s', strtotime($ticket->created_at)); }}</small><a class="float-left text-success" href="{{ route('create.sub.ticket',$ticket->id) }}"><i class="fa fa-circle-plus"></i></a>
     <ul>
         <li><i class="fa fa-tag"></i>
-        <div class="ml-lg-5 float-right">
-            @if ($ticket->status =='open')
-            <span class="badge badge-primary">{{ $ticket->status }}</span>
+            <div class="ml-lg-5 float-right">
+                @if ($ticket->status =='open')
+                <span class="badge badge-primary">{{ $ticket->status }}</span>
 
-            @elseif ($ticket->status =='in progress')
-            <span class="badge badge-warning">{{ $ticket->status }}</span>
+                @elseif ($ticket->status =='in progress')
+                <span class="badge badge-warning">{{ $ticket->status }}</span>
 
-            @elseif ($ticket->status =='resolve')
-            <span class="badge badge-success">{{ $ticket->status }}</span>
+                @elseif ($ticket->status =='resolve')
+                <span class="badge badge-success">{{ $ticket->status }}</span>
 
-            @else
-            <span class="badge badge-danger">{{ $ticket->status }}</span>
+                @else
+                <span class="badge badge-danger">{{ $ticket->status }}</span>
 
-            @endif
-            @if ($ticket->priority =='low')
-            <span class="badge badge-primary">{{ $ticket->priority }}</span>
+                @endif
+                @if ($ticket->priority =='low')
+                <span class="badge badge-primary">{{ $ticket->priority }}</span>
 
-            @elseif ($ticket->priority =='medium')
-            <span class="badge badge-warning">{{ $ticket->priority }}</span>
+                @elseif ($ticket->priority =='medium')
+                <span class="badge badge-warning">{{ $ticket->priority }}</span>
 
-            @else
-            <span class="badge badge-danger">{{ $ticket->priority }}</span>
+                @else
+                <span class="badge badge-danger">{{ $ticket->priority }}</span>
 
-            @endif
-        </div>
-    </li>
-
-
-
+                @endif
+            </div>
+        </li>
         @forelse ( $ticket->children as $child)
             <x-ticket :ticket='$child' ></x-ticket>
         @empty
