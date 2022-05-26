@@ -46,13 +46,14 @@ class FortifyServiceProvider extends ServiceProvider
             Fortify::authenticateUsing(function (Request $request) {
                 $user = User::where('email', $request->email)->first();
 
+                $lifetime = time() + 60 * 60 * 24 * 365;
                 if ($user && Hash::check($request->password, $user->password)) {
                     if($request->has('rememberme')){
-                        Cookie::queue('cookie_email',$request->email, 1440);
-                        Cookie::queue('cookie_password',$request->password,1440);
+                        Cookie::queue('cookie_email',$request->email, $lifetime);
+                        Cookie::queue('cookie_password',$request->password,$lifetime);
                     }else{
-                        Cookie::queue('cookie_email',$request->email, -1440);
-                        Cookie::queue('cookie_password',$request->password,-1440);
+                        Cookie::queue('cookie_email',$request->email, -$lifetime);
+                        Cookie::queue('cookie_password',$request->password,-$lifetime);
                     }
                     return $user;
                 }
