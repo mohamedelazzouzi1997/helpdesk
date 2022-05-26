@@ -28,7 +28,7 @@
                         </ul>
                     <a style="padding-top: 0;padding-bottom: 0;"  href="{{ route('show.ticket',$notification->data['ticket']['id']) }}">
                         <div style="width: 100%;" class="progress-container progress-primary">
-                            <strong class="text-danger text-truncate">{{ $notification->data['ticket']['title'] }}</strong>
+                            <strong style="color:@if(Cookie::get('color_skin') != 'blush') {{ Cookie::get('color_skin') }} @elseif(Cookie::get('color_skin') == 'blush') palevioletred @endif!important" class="text-danger text-truncate">{{ $notification->data['ticket']['title'] }}</strong>
                             <div style='width:100%' class="text-black">
                                 <small class="text-black">
                                     <small class="text-blue">
@@ -63,7 +63,7 @@
                                 <a style="padding-bottom: 0px" href="{{ route('show.ticket',$task->id) }}">
                                     <div style="width: 100%;" class="progress-container progress-primary">
 
-                                        <span ><small class="text-danger text-truncate">{{ $task->title }}</small>
+                                        <span ><small style="color:@if(Cookie::get('color_skin') != 'blush') {{ Cookie::get('color_skin') }} @elseif(Cookie::get('color_skin') == 'blush') palevioletred @endif!important" class="text-danger text-truncate">{{ $task->title }}</small>
                                         <div class="ml-lg-5 float-right">
                                                 {{-- @if ($task->status =='open')
                                                 <span class="badge badge-primary">{{ $task->status }}</span>

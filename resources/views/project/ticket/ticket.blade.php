@@ -82,10 +82,12 @@
         </div>
     </div>
 
-    <div class="col-lg-8 col-md-12">
-        <div class="card">
+    <div class="col-lg-8 col-md-12 pt-0">
+        <div style='margin-top:-22px' class="card">
+            <div style="padding-left: 18px;" class="header">
+                <h2><strong>Ticket</strong> Description</h2>
+            </div>
             <div class="body">
-                <h5><span style='color:#e88797'>Ticket</span> Description</h5>
                 <span>{{ $ticket->description }}</span>
             </div>
         </div>

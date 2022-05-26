@@ -8,7 +8,7 @@
         <ul class="list">
             <li>
                 <div class="user-info">
-                    <div class="image"><a href="#"><img src="{{ Auth::user()->image == null ? 'https://ui-avatars.com/api/?color=ff0000&name='.Auth::user()->name : asset('upload/profile/'.Auth::user()->image) }}" alt="{{Auth::user()->name}}"></a></div>
+                    <div class="image"><a href="{{ route('profile') }}"><img src="{{ Auth::user()->image == null ? 'https://ui-avatars.com/api/?color=ff0000&name='.Auth::user()->name : asset('upload/profile/'.Auth::user()->image) }}" alt="{{Auth::user()->name}}"></a></div>
                     <div class="detail">
                         <h4>{{Auth::user()->name}}</h4>
                         <span class='badge badge-danger mb-2'>{{Auth::user()->role}}</span>
