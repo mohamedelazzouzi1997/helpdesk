@@ -96,7 +96,7 @@
                                 @enderror
                                 <textarea name="description" cols="30" rows="5" placeholder="Description" class="form-control no-resize @error('description') is-invalid @enderror" required>{{ $ticket->description }}</textarea>
                             </div>
-                            <div style="margin-left: -13px;" class="col-lg-3 col-md-6 form-group inlineblock">
+                            <div style="margin-left: -15px;" class="col-lg-3 col-md-6 mb-4 form-group inlineblock">
                                 <label class="font-weight-bolder font-20"> <b>Assign ticket to user</b> </label>
                                 @error('user_id')
                                     <span style="display: block;" class="invalid-feedback" role="alert">
@@ -113,14 +113,14 @@
                                 </select>
                             </div>
 
-                            <div class="col-lg-4 col-md-6 inlineblock">
+                            <div style='margin' class="col-lg-4 col-md-6 inlineblock form-group">
                                 <label class="font-weight-bolder font-20">Date Time</label>
                                 @error('end_time')
                                     <span style="display: block;" class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <div class="input-group masked-input mb-3">
+                                <div class="input-group masked-input form-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="zmdi zmdi-calendar-note"></i></span>
                                     </div>
