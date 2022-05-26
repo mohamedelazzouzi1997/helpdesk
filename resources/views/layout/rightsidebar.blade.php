@@ -21,12 +21,12 @@
                 <div class="card">
                     <h6>Color Skins</h6>
                     <ul class="choose-skin list-unstyled">
-                        <li data-theme="purple"><div class="purple"></div></li>
-                        <li data-theme="blue"><div class="blue"></div></li>
-                        <li data-theme="cyan"><div class="cyan"></div></li>
-                        <li data-theme="green"><div class="green"></div></li>
-                        <li data-theme="orange" class="active"><div class="orange"></div></li>
-                        <li data-theme="blush" ><div class="blush"></div></li>
+                        <li data-theme="purple"  @if ($setting == 'purple') class="active" @endif ><a href="{{ route('theme.color','purple') }}"><div class="purple"></div></a></li>
+                        <li data-theme="blue"    @if ($setting == 'blue') class="active" @endif ><a href="{{ route('theme.color','blue') }}"><div class="blue"></div></a></li>
+                        <li data-theme="cyan"    @if ($setting == 'cyan') class="active" @endif ><a href="{{ route('theme.color','cyan') }}"><div class="cyan"></div></a></li>
+                        <li data-theme="green"   @if ($setting == 'green') class="active" @endif ><a href="{{ route('theme.color','green') }}"><div class="green"></div></a></li>
+                        <li data-theme="orange"  @if ($setting == 'orange') class="active" @endif ><a href="{{ route('theme.color','orange') }}"><div class="orange"></div></a></li>
+                        <li data-theme="blush"   @if ($setting == 'blush') class="active" @endif ><a href="{{ route('theme.color','blush') }}"><div class="blush"></div></a></li>
                     </ul>
                 </div>
             </div>

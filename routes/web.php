@@ -41,4 +41,7 @@ Route::middleware('auth')->group(function () {
 
     //notification routes
     Route::post('/mark-as-read', 'notificationController@markNotification')->name('markNotification');
+
+    //theme color Routes
+    Route::get('/theme/color/{color}', 'ThemeController@themeColorSkin')->name('theme.color');
 });

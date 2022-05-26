@@ -20,25 +20,29 @@
         <link rel="stylesheet" href="{{asset('assets/plugins/dropify/css/dropify.min.css')}}"/>
         <!-- Custom Css -->
         <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         @stack('after-styles')
-
     </head>
     <?php
-        $setting = !empty($_GET['theme']) ? $_GET['theme'] : '';
+
+        if (Cookie::has('color_skin')){
+             $setting =  Cookie::get('color_skin');
+        }else{
+            $setting = '';
+        }
         $theme = "theme-blush";
         $menu = "";
-        if ($setting == 'p') {
+        if ($setting == 'purple') {
             $theme = "theme-purple";
-        } else if ($setting == 'b') {
+        } else if ($setting == 'blue') {
             $theme = "theme-blue";
-        } else if ($setting == 'g') {
+        } else if ($setting == 'green') {
             $theme = "theme-green";
-        } else if ($setting == 'o') {
+        } else if ($setting == 'orange') {
             $theme = "theme-orange";
-        } else if ($setting == 'bl') {
+        } else if ($setting == 'cyan') {
             $theme = "theme-cyan";
-        } else {
+        } else if ($setting == 'blush'){
             $theme = "theme-blush";
         }
 
@@ -82,6 +86,15 @@
             </div>
             <div class="container-fluid">
                 @yield('content')
+                @if (session()->has('success'))
+                    <div data-notify="container" class="bootstrap-notify-container alert alert-dismissible alert-success animated fadeInDown" role="alert" data-notify-position="bottom-left" style="padding-top: 25px; display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 1031; bottom: 20px; left: 20px;">
+                        <button type="button" aria-hidden="true" class="close" data-notify="dismiss" style="padding-top: 22px; position: absolute; right: 10px; top: 5px; z-index: 1033;">×</button>
+                        <span data-notify="icon"></span>
+                        <span data-notify="title"></span>
+                        <span data-notify="message">{{ session()->get('success') }}</span>
+                        <a class='close' href="#" target="_blank" data-notify="url"></a>
+                    </div>
+                @endif
             </div>
         </section>
         @yield('modal')
@@ -112,9 +125,9 @@
                     let count = document.getElementById("notifCount").textContent;
                     let request = sendMarkRequest($(this).data('id'));
                     request.done(() => {
-                        if( count - 1 == 0 ){
+                        if (count - 1 == 0) {
                             $('#notifCount').remove();
-                        }else{
+                        } else {
                             $('#notifCount').text(count - 1);
                         }
                         $(this).parents('li.pt-0').remove();
