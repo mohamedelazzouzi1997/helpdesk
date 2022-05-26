@@ -33,14 +33,12 @@
                                 <small class="text-black">
                                     <small class="text-blue">
                                         {{ $notification->created_at->diffForHumans() }}
-
                                     </small>
                                 </small>
                             </div>
                         </div>
                     </a>
                 </li>
-
                 @empty
                   <li style='color:grey' class="body ml-5 mt-2">notifications are empty</li>
                 @endforelse
@@ -52,7 +50,6 @@
             <div class="notify"><span class="heartbit"></span><span class="point">@if ($tasks->count())
                 <span class="badge badge-danger">{{ $tasks->count() }}</span>
             @endif</span></div>
-
             </a>
             <ul class="dropdown-menu slideUp2">
                 <li class="header">Tasks List <small class="float-right"></small></li>
@@ -90,15 +87,12 @@
                                                 @endif
                                             </div>
                                         </span>
-
                                         <ul class="list-unstyled team-info">
                                             <li style=" margin-bottom:0px" class="m-r-15"><small class="text-black">Created by <small class="text-blue">{{ $task->created_by }}</small></small> </li>
-
                                         </ul>
                                     </div>
                                 </a>
                             </li>
-
                         @empty
                             <li><span style='color:grey' class='ml-5 mt-5'>your are tasks empty</span></li>
                         @endforelse ( $tasks as $task)

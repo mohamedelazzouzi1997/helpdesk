@@ -102,12 +102,10 @@
             </div>
         </div>
         @if ($ticket->image != NULL)
-
             <div class="card">
-
                 <div class="body">
-                     <h5><span style='color:#e88797'>Ticket</span> issue</h5>
-                <!-- Modal -->
+                     <h5><span style='color:#e88797'>Ticket</span> image</h5>
+                    <!-- Modal -->
                     <a width='100%' class="btn btn-link" data-toggle="modal" data-target=".bd-example-modal-lg">
                         <img width='100%' height="100%" id="myImg" src="{{ asset('/upload/tickets/'.$ticket->image) }}" alt="Snow">
                     </a>

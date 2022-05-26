@@ -19,7 +19,7 @@
                     <input name='email' value='@if (Cookie::has('cookie_email'))
                         {{ Cookie::get('cookie_email') }}'
 
-                    @endif' type="email" class="form-control" placeholder="Email">
+                    @endif' type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
                     <div class="input-group-append">
                         <span class="input-group-text"><i class="zmdi zmdi-account-circle"></i></span>
                     </div>
@@ -32,7 +32,7 @@
                     @enderror
                     <input @if (Cookie::has('cookie_password'))
                         value='{{ Cookie::get('cookie_password') }}'
-                    @endif name='password' type="password" class="form-control" placeholder="Password">
+                    @endif name='password' type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
                     <div class="input-group-append">
                         <span class="input-group-text"><i class="zmdi zmdi-lock"></i></span>
                     </div>
@@ -51,13 +51,14 @@
                 </div>
                 <div class="signin_with mt-3">
                     <a class="link" href="{{url('/register')}}">Register Now</a>
+                    <br><a class="link" href="{{url('/forgot-password')}}">Forgot password</a>
                 </div>
             </div>
         </form>
         <div class="copyright text-center">
             &copy;
             <script>document.write(new Date().getFullYear())</script>,
-            <span>Designed by <a href="https://thememakker.com/" target="_blank">ThemeMakker</a></span>
+            <span>Designed by</span>
         </div>
     </div>
     <div class="col-lg-8 col-sm-12">

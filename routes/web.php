@@ -34,7 +34,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/resolve/ticket/{id}', 'ticketController@resolve')->name('resolve.ticket');
     Route::get('/edit/ticket/{id}', 'ticketController@edit')->name('edit.ticket');
     Route::get('/delete/ticket/{id}', 'ticketController@delete')->name('delete.ticket');
-    //tickets route
 
     //profile routes
     Route::put('/profile/{id}', 'userController@update')->name('update.profile');
