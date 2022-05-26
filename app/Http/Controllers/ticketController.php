@@ -19,7 +19,7 @@ class ticketController extends Controller
 
     public function index(){
 
-        $tickets = Ticket::whereNull('parent_id')->with('children')->latest()->paginate(5);
+        $tickets = Ticket::whereNull('parent_id')->with('children')->latest()->paginate(10);
 
 
         $total_tickets = Ticket::all();
