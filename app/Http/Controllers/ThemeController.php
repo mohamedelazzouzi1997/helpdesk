@@ -28,7 +28,7 @@ class ThemeController extends Controller
         }
 
         return redirect()->back()->with([
-            'success' => 'color skin changed successfully'
+            'success' => 'color skin changed successfully to '.$color
         ]);
     }
 }

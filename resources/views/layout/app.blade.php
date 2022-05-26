@@ -87,8 +87,8 @@
             <div class="container-fluid">
                 @yield('content')
                 @if (session()->has('success'))
-                    <div data-notify="container" class="bootstrap-notify-container alert alert-dismissible alert-success animated fadeInDown" role="alert" data-notify-position="bottom-left" style="padding-top: 25px; display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 1031; bottom: 20px; left: 20px;">
-                        <button type="button" aria-hidden="true" class="close" data-notify="dismiss" style="padding-top: 22px; position: absolute; right: 10px; top: 5px; z-index: 1033;">×</button>
+                    <div data-notify="container" class="bootstrap-notify-container alert alert-dismissible alert-success animated fadeInDown" role="alert" data-notify-position="bottom-left" style="padding-top: 14px; display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 1031; bottom: 20px; left: 20px;">
+                        <button type="button" aria-hidden="true" class="close" data-notify="dismiss" style="padding-top: 12px; position: absolute; right: 10px; top: 5px; z-index: 1033;">×</button>
                         <span data-notify="icon"></span>
                         <span data-notify="title"></span>
                         <span data-notify="message">{{ session()->get('success') }}</span>
@@ -104,7 +104,7 @@
 
         <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
-
+        <script src="{{ asset('assets/js/alert.js')}}"></script>
         <script src="{{ asset('assets/bundles/mainscripts.bundle.js') }}"></script>
         @stack('after-scripts')
         @if (trim($__env->yieldContent('page-script')))

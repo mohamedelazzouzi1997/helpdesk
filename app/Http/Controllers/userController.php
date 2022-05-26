@@ -47,7 +47,7 @@ class userController extends Controller
         }
 
         return \redirect()->back()->with([
-            'success' => 'picture updated'
+            'success' => 'Your picture updated successfully'
         ]);
     }
 }
