@@ -40,6 +40,7 @@ class userController extends Controller
             $extention = $file->getClientOriginalName();
             $filename = time().'_'. $extention;
             $file->move(public_path('upload/profile/'),$filename);
+            unlink(public_path('upload/profile/'.$user->image));
             $user->update([
             'image' => $filename,
         ]);
