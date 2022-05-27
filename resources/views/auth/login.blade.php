@@ -3,6 +3,15 @@
 @section('content')
 <div class="row">
     <div class="col-lg-4 col-sm-12">
+        @if (session()->has('status'))
+            <div data-notify="container" class="bootstrap-notify-container alert alert-dismissible alert-success animated fadeInDown" role="alert" data-notify-position="bottom-left" style="padding-top: 14px; display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 1031; bottom: 20px; left: 20px;">
+                <button type="button" aria-hidden="true" class="close" data-notify="dismiss" style="padding-top: 12px; position: absolute; right: 10px; top: 5px; z-index: 1033;">×</button>
+                <span data-notify="icon"></span>
+                <span data-notify="title"></span>
+                <span data-notify="message">{{ session()->get('status') }}</span>
+                <a class='close' href="#" target="_blank" data-notify="url"></a>
+            </div>
+        @endif
         <form action='{{route('login')}}' method='post' class="card auth_form">
             @csrf
             <div class="header">
@@ -67,4 +76,5 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('assets/js/alert.js')}}"></script>
 @stop

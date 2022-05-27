@@ -33,8 +33,8 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-block waves-effect waves-light">SUBMIT</button>
                 <div class="signin_with mt-3">
-                    <a href="javascript:void(0);" class="link">Need Help?</a> <br>
-                    <a href="{{ url('/login') }}" class="link">go to login</a>
+                    <a href="javascript:void(0);" class="link">Need Help?</a> <br><br>
+                    <a href="{{ url('/login') }}" class="link">Login</a>
                 </div>
             </div>
         </form>
