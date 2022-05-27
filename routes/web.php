@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth')->name('dashboard');
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','verified'])->group(function () {
 
     Route::get('/', function () {return redirect()->route('tickets');})->name('dashboard');
     Route::get('/user/profile', 'userController@index')->name('profile');
