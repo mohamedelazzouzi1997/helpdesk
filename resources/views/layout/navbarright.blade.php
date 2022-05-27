@@ -56,8 +56,9 @@
                 <li class="body">
                     <ul style="padding: 0px;" class="menu tasks list-unstyled">
                         @forelse ( $tasks as $task )
+                            <li  class='float-right' style="margin-bottom:0px">  <a style="padding-top: 47%;padding-bottom: 47%; margin: 0;" href="{{ route('resolve.ticket',$task->id) }}" class="btn btn-link btn-sm float-right"><i class="fa fa-check text-green"></i></a></li>
                             <li style="border-bottom: .5px solid #eee; margin-bottom:0px">
-                                <a style="padding-bottom: 0px" href="{{ route('show.ticket',$task->id) }}">
+                                <a style="padding-bottom: 0px; padding-top:0px;" href="{{ route('show.ticket',$task->id) }}">
                                     <div style="width: 100%;" class="progress-container progress-primary">
 
                                         <span ><small style="color:@if(Cookie::get('color_skin') != 'blush') {{ Cookie::get('color_skin') }} @elseif(Cookie::get('color_skin') == 'blush') palevioletred @endif!important" class="text-danger text-truncate">{{ $task->title }}</small>
@@ -88,7 +89,7 @@
                                             </div>
                                         </span>
                                         <ul class="list-unstyled team-info">
-                                            <li style=" margin-bottom:0px" class="m-r-15"><small class="text-black">Created by <small class="text-blue">{{ $task->created_by }}</small></small> </li>
+                                            <li style=" margin-bottom:0px" class="m-r-15"><small class="text-black">Created <small class="text-blue">{{ $task->created_at->diffForHumans() }}</small></small> </li>
                                         </ul>
                                     </div>
                                 </a>

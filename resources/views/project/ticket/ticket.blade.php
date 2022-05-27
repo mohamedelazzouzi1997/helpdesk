@@ -46,7 +46,7 @@
                 <p>{{ $ticket->title }}</p>
                 <hr>
                 <small class="text-muted">Created Date: </small>
-                <p>{{ date('d/m/Y h:s', strtotime($ticket->created_at)); }}</p>
+                <p>{{ $ticket->created_at->diffForHumans() }}</p>
                 <hr>
                 <small class="text-muted">DeadLine Date: </small>
                 <p>{{ date('d/m/Y h:s', strtotime($ticket->end_time)); }}</p>
