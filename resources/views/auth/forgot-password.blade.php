@@ -50,5 +50,4 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('assets/js/alert.js')}}"></script>
 @stop

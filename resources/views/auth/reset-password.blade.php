@@ -29,7 +29,7 @@
                         </span>
                     @enderror
                     <input name='password' type="password" class="form-control  @error('password') is-invalid @enderror" required placeholder="Password">
-                    <div class="input-group-append  @error('password')@enderror">
+                    <div class="input-group-append">
                         <span class="input-group-text"><i class="zmdi zmdi-lock"></i></span>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                         <span class="input-group-text"><i class="zmdi zmdi-lock"></i></span>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary btn-block waves-effect waves-light">update</button>
+                <button type="submit" class="btn btn-primary btn-block waves-effect waves-light">Reset</button>
                 <div class="signin_with mt-3">
                     <a href="javascript:void(0);" class="link">Need Help?</a> <br><br>
                     <a href="{{ url('/login') }}" class="link">Login</a>
@@ -58,5 +58,4 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('assets/js/alert.js')}}"></script>
 @stop

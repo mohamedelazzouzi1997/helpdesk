@@ -19,23 +19,26 @@
         @stack('after-styles')
     </head>
     <?php
-        $setting = !empty($_GET['theme']) ? $_GET['theme'] : '';
+        if (Cookie::has('color_skin')){
+             $setting =  Cookie::get('color_skin');
+        }else{
+            $setting = '';
+        }
         $theme = "theme-cyan";
         $menu = "";
-        if ($setting == 'p') {
+        if ($setting == 'purple') {
             $theme = "theme-purple";
-        } else if ($setting == 'b') {
+        } else if ($setting == 'blue') {
             $theme = "theme-blue";
-        } else if ($setting == 'g') {
+        } else if ($setting == 'green') {
             $theme = "theme-green";
-        } else if ($setting == 'o') {
+        } else if ($setting == 'orange') {
             $theme = "theme-orange";
-        } else if ($setting == 'bl') {
+        } else if ($setting == 'cyan') {
             $theme = "theme-blush";
-        } else {
-             $theme = "theme-cyan";
+        } else if ($setting == 'blush'){
+            $theme = "theme-blush";
         }
-
     ?>
     <body class="<?= $theme ?>">
     <div class="authentication">
@@ -45,9 +48,11 @@
     </div>
 
         <!-- Scripts -->
+
         @stack('before-scripts')
         <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
         @stack('after-scripts')
+        <script src="{{ asset('assets/js/alert.js')}}"></script>
     </body>
 </html>

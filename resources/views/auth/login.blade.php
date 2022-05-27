@@ -28,7 +28,7 @@
                     <input name='email' value='@if (Cookie::has('cookie_email'))
                         {{ Cookie::get('cookie_email') }}'
 
-                    @endif' type="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+                    @endif' type="email" class="form-control" placeholder="Email">
                     <div class="input-group-append">
                         <span class="input-group-text"><i class="zmdi zmdi-account-circle"></i></span>
                     </div>
@@ -76,5 +76,4 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('assets/js/alert.js')}}"></script>
 @stop
