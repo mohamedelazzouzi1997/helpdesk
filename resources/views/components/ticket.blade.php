@@ -1,7 +1,7 @@
 
 @props(['ticket'])
 <li><i class="fa fa-folder-open"> </i><a class="ml-3" style="color:@if(Cookie::get('color_skin') != 'blush') {{ Cookie::get('color_skin') }} @elseif(Cookie::get('color_skin') == 'blush') palevioletred @endif" href="{{ route('show.ticket',$ticket->id) }}"> {{ $ticket->title }}</a>
-    <small class="float-right text-blue">{{ date('d/m/Y h:s', strtotime($ticket->created_at)); }}</small><a class="float-left text-success" href="{{ route('create.sub.ticket',$ticket->id) }}"><i class="fa fa-circle-plus"></i></a>
+    <small class="float-right text-blue">{{ $ticket->created_at->diffForHumans() }}</small><a class="float-left text-success" href="{{ route('create.sub.ticket',$ticket->id) }}"><i class="fa fa-circle-plus"></i></a>
     <ul>
         <li><i class="fa fa-tag"></i>
             <div class="ml-lg-5 float-right">
