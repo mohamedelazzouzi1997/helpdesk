@@ -7,6 +7,7 @@ use App\Models\Ticket;
 use App\Models\Project;
 use App\Mail\ticketMail;
 use Illuminate\Http\Request;
+use App\Events\notificationEvent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
@@ -118,6 +119,11 @@ class ticketController extends Controller
 
             $user->notify(new TicketNotification($ticket));
 
+            $user_id_notified  = $ticket->user->id;
+            $notification_status = 'ticket '.$ticket->id.' assigned to you by '.Auth::user()->name;
+
+            event(new notificationEvent($user_id_notified,$notification_status));
+
             return redirect()->route('show.ticket',$ticket->id)->with([
             'success' => 'ticket created successfully'
             ]);
@@ -160,6 +166,12 @@ class ticketController extends Controller
             'user_id' => $request->user_id
         ]);
         if($updated){
+
+            $user_id_notified  = $ticket->user->id;
+
+            $notification_status = 'ticket '.$ticket->id.' updated by '.Auth::user()->name;
+
+            event(new notificationEvent($user_id_notified,$notification_status));
             return redirect()->route('show.ticket',$ticket->id)->with([
                         'success' => 'ticket updated successfully'
                     ]);
@@ -186,6 +198,11 @@ class ticketController extends Controller
     public function delete($id){
         $ticket = Ticket::find($id);
 
+        $user_id_notified  = $ticket->user->id;
+        $notification_status = 'ticket '.$ticket->id.' deleted by '.Auth::user()->name;
+
+        event(new notificationEvent($user_id_notified,$notification_status));
+
         $ticket->delete();
         return redirect()->route('tickets')->with([
             'success' => 'ticket deleted successfully'
@@ -201,6 +218,10 @@ class ticketController extends Controller
         ]);
 
         if($updated){
+            $user_id_notified  = $ticket->user->id;
+            $notification_status = 'ticket '.$ticket->id.' resolved by '.Auth::user()->name;
+
+            event(new notificationEvent($user_id_notified,$notification_status));
             return redirect()->route('show.ticket',$ticket->id)->with([
                 'success' => 'ticket resolved successfully'
             ]);

@@ -73,8 +73,8 @@
                             @else
                                 <span class="badge badge-danger">{{ $ticket->status }}</span>
                             @endif
-                            @if($ticket->status !='resolve')
                             <a href="{{ route('resolve.ticket',$ticket->id) }}" class="btn btn-success float-right"><i class="fa fa-check"></i></a>
+                            @if($ticket->status !='resolve')
                             @endif
                     </li>
                 </ul>

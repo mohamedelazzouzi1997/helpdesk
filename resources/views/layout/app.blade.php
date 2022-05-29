@@ -84,6 +84,9 @@
                     </div>
                 </div>
             </div>
+            <div id='notification-container' >
+            </div>
+
             <div class="container-fluid">
                 @yield('content')
                 @if (session()->has('success'))
@@ -101,7 +104,7 @@
         <!-- Scripts -->
         @stack('before-scripts')
         <!-- JavaScript Bundle with Popper -->
-
+        <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
         <script src="{{ asset('assets/js/alert.js')}}"></script>
@@ -110,6 +113,14 @@
         @if (trim($__env->yieldContent('page-script')))
             @yield('page-script')
 		@endif
+
+        <script>
+
+            Echo.private('notify.{{ auth()->id() }}').listen('.ticket-notification',(e) =>{
+                $("#notification-container").prepend(`<div data-notify="container" class="bootstrap-notify-container alert alert-dismissible bg-teal animated fadeInDown" role="alert" data-notify-position="bottom-right" style="display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out 0s; z-index: 1031; bottom: 20px; right: 20px;"><button type="button" aria-hidden="true" class="close" data-notify="dismiss" style="position: absolute; right: 10px; top: 5px; z-index: 1033;">×</button><span data-notify="icon"></span> <span data-notify="title"></span> <span data-notify="message">${e.notification_status}</span><a href="#" target="_blank" data-notify="url"></a></div>`);
+                // $("#notification-container").css({"opacity":"1"});
+            })
+        </script>
         <script>
             function sendMarkRequest(id = null) {
                 return $.ajax("{{ route('markNotification') }}", {
